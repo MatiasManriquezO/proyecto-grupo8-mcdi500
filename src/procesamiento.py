@@ -25,7 +25,7 @@ COLUMNAS_ANALISIS = {
     "q2":       "sexo_cod",             # Sexo (1 = Femenino, 2 = Masculino)
     "raceeth":  "raceeth_cod",          # Raza/etnicidad (8 categorías)
     "q84":      "salud_mental_cod",     # Salud mental percibida (1 = Never … 5 = Always)
-    "q80":      "redes_sociales_cod",   # Horas/día en dispositivos electrónicos (1 = no usa … 8 = ≥6 h)
+    "q80":      "redes_sociales_cod",   # Frecuencia de uso de redes sociales (1 = no usa … 8 = más de una vez por hora)
     "q85":      "sueno_cod",            # Horas de sueño (1 = ≤4 h … 7 = ≥10 h)
     "q76":      "actividad_fisica_cod", # Días activo ≥60 min (1 = 0 días … 8 = 7 días)
 }
