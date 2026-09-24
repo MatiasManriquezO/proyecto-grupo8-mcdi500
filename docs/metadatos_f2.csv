@@ -1,0 +1,27 @@
+clave,valor
+proyecto.nombre,Redes sociales y salud mental (YRBS 2023)
+proyecto.grupo,Grupo 8
+proyecto.fase,F2
+proyecto.semilla,42
+datos.archivo,F1/data/raw/XXH2023_YRBSS_data.csv
+datos.dimensiones_originales,"20103, 117"
+datos.dimensiones_finales,"20103, 26"
+datos.fuente.institucion,CDC
+datos.fuente.url,https://www.cdc.gov/yrbs/data/index.html
+decisiones.eliminadas,orig_rec
+decisiones.faltantes.estrategia,conservar NA + bandera caso_completo
+decisiones.faltantes.casos_completos,10941
+decisiones.ordinales,"edad_cod, redes_sociales_cod, salud_mental_cod, sueno_cod, actividad_fisica_cod"
+decisiones.one_hot.raceeth_cod,"raza_amerindia, raza_asiatica, raza_negra, raza_hawaiana_pacifico, raza_blanca, raza_hispana, raza_multiple_hispana, raza_multiple_no_hispana"
+decisiones.indicadores.sexo_femenino.origen,sexo_cod
+decisiones.indicadores.sexo_femenino.positivos,1
+decisiones.indicadores.salud_mental_mala.origen,salud_mental_cod
+decisiones.indicadores.salud_mental_mala.positivos,"4, 5"
+decisiones.indicadores.redes_uso_frecuente.origen,redes_sociales_cod
+decisiones.indicadores.redes_uso_frecuente.positivos,"6, 7, 8"
+decisiones.indicadores.sueno_8h_o_mas.origen,sueno_cod
+decisiones.indicadores.sueno_8h_o_mas.positivos,"5, 6, 7"
+decisiones.indicadores.actividad_5_dias.origen,actividad_fisica_cod
+decisiones.indicadores.actividad_5_dias.positivos,"6, 7, 8"
+decisiones.escalamiento,ninguno (ver sección 5)
+decisiones.ponderacion,no en F1-F2; weight/stratum/psu conservados

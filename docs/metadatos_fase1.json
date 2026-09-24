@@ -1,0 +1,35 @@
+{
+  "proyecto": "Uso de redes sociales y salud mental autopercibida en adolescentes (YRBS 2023)",
+  "grupo": "Grupo 8",
+  "repositorio": "https://github.com/MatiasManriquezO/proyecto-grupo8-mcdi500",
+  "fase": "F1",
+  "fecha_ejecucion": "2026-09-24",
+  "semilla": 42,
+  "python": "3.14.7",
+  "sistema": "Windows 11",
+  "tipo_entorno": "entorno conda 'notebook-env'",
+  "dependencias": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "ipykernel": "7.3.0",
+    "jupyterlab": "4.5.9"
+  },
+  "commit": "5f59df7",
+  "dataset": {
+    "titulo": "2023 National Youth Risk Behavior Survey (YRBS)",
+    "url": "https://www.cdc.gov/yrbs/data/index.html",
+    "archivo": "F1/data/raw/XXH2023_YRBSS_data.csv",
+    "archivo_descargado": true,
+    "dimensiones_originales": [
+      20103,
+      117
+    ],
+    "dimensiones_subconjunto": [
+      20103,
+      11
+    ]
+  },
+  "criterios_incumplidos": [
+    "Fecha"
+  ]
+}
