@@ -1,0 +1,49 @@
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# ── Entornos virtuales ────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Jupyter ───────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+.virtual_documents/
+profile_default/
+ipython_config.py
+
+# ── Sistema operativo ─────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Editores e IDEs ───────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Datos procesados ──────────────────────────────────────
+# La salida del pipeline se regenera ejecutando F2.
+# El dataset original (F1/Data/raw/) SÍ se versiona.
+F2/data/processed/*.csv
+
+# ── Anaconda ──────────────────────────────────────────────
+anaconda_projects/
+
+# ── Temporales ────────────────────────────────────────────
+*.log
+*.tmp
+.cache/
