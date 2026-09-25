@@ -36,9 +36,8 @@ desktop.ini
 *~
 
 # ── Datos procesados ──────────────────────────────────────
-# La salida del pipeline se regenera ejecutando F2.
-# El dataset original (F1/Data/raw/) SÍ se versiona.
-F2/data/processed/*.csv
+# El dataset original (F1/data/raw/) y la salida del pipeline
+# (F2/data/processed/) SÍ se versionan: F3 lee el procesado desde el repositorio.
 
 # ── Anaconda ──────────────────────────────────────────────
 anaconda_projects/
