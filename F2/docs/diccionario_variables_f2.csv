@@ -1,0 +1,12 @@
+variable,nombre_proyecto,rol,descripcion,dtype,n_unicos,pct_nulos
+record,id_registro,identificador,Identificador del registro,int64,20103,0.0
+weight,peso_muestral,continua,Factor de expansión (diseño muestral),float64,2699,0.0
+stratum,estrato,diseño muestral,Estrato,int64,16,0.0
+psu,psu,diseño muestral,Unidad primaria de muestreo,int64,82,0.0
+q1,edad_cod,ordinal,"Edad, 7 niveles",float64,7,0.5
+q2,sexo_cod,nominal,"Sexo, 2 niveles",float64,2,0.8
+raceeth,raceeth_cod,nominal,"Raza/etnicidad, 8 categorías",float64,8,1.8
+q84,salud_mental_cod,ordinal,"Salud mental no buena, 30 días (desenlace)",float64,5,21.9
+q80,redes_sociales_cod,ordinal,Frecuencia de uso de redes sociales (exposición),float64,8,24.4
+q85,sueno_cod,ordinal,Horas de sueño en noche escolar,float64,7,13.2
+q76,actividad_fisica_cod,ordinal,Días activo ≥60 min en 7 días,float64,8,6.1
