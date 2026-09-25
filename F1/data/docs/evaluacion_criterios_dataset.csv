@@ -1,0 +1,11 @@
+criterio,archivo original,conjunto de trabajo
+Filas,sí,sí
+Columnas,sí,sí
+Numéricas continuas,sí,sí
+Numérica discreta,sí,sí
+Categóricas nominales,sí,sí
+Binaria u ordinal,sí,sí
+Fecha,NO,NO
+Texto o alta cardinalidad,sí,sí
+Alguna variable con ≥1% de nulos,sí,sí
+Ninguna variable sobre 60% de nulos,NO,sí
