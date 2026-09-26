@@ -1,0 +1,16 @@
+# Unifica las identidades de Git de un mismo integrante.
+#
+# Por qué existe este archivo: la guía de la Sumativa 2 advierte que "si una
+# persona aparece con dos nombres distintos, Git la cuenta como dos autores",
+# y el criterio IV evalúa que las contribuciones sean trazables por integrante.
+#
+# Daniel commiteó con dos identidades distintas (DanielRamirezPerez y
+# d.ramrezprez) sobre el mismo correo. Sin este archivo, `git shortlog -sne`
+# lo muestra como dos personas y sus 9 commits aparecen divididos en 8 + 1.
+#
+# Verificar con:  git shortlog -sne
+# La forma es:    Nombre canónico <correo canónico> <correo alternativo>
+
+Daniel Ramírez Pérez <d.ramrezprez@uandresbello.edu> <d.ramrezprez@uandresbello.edu>
+Matías Manríquez Ortiz <m.manriquezortiz@uandresbello.edu>
+Roberto Sánchez Saldivia <r.snchezsaldivia@uandresbello.edu>
