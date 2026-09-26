@@ -1,12 +1,4 @@
 orden,paso,parametros
 1,EliminadorColumnas(id_registro),{'existe': True}
-2,ImputadorMediana(redes_sociales_cod),"{'mediana': 6.0, 'nulos_en_ajuste': 3281}"
-3,ImputadorMediana(sueno_cod),"{'mediana': 4.0, 'nulos_en_ajuste': 724}"
-4,ImputadorMediana(actividad_fisica_cod),"{'mediana': 5.0, 'nulos_en_ajuste': 487}"
-5,ImputadorMediana(edad_cod),"{'mediana': 5.0, 'nulos_en_ajuste': 55}"
-6,CodificadorNominal(raceeth_cod),"{'categorias': [np.float64(1.0), np.float64(2.0), np.float64(3.0), np.float64(4.0), np.float64(5.0), np.float64(6.0), np.float64(7.0), np.float64(8.0)]}"
-7,CodificadorNominal(sexo_cod),"{'categorias': [np.float64(1.0), np.float64(2.0)]}"
-8,EscaladorEstandar(redes_sociales_cod),"{'media': 6.0495861190703595, 'desviacion': 1.681001714257992}"
-9,EscaladorEstandar(sueno_cod),"{'media': 3.482012098057943, 'desviacion': 1.3437611694668181}"
-10,EscaladorEstandar(actividad_fisica_cod),"{'media': 4.992916268704234, 'desviacion': 2.4705922932335627}"
-11,EscaladorEstandar(edad_cod),"{'media': 4.943568927093282, 'desviacion': 1.2084037495185969}"
+2,CodificadorNominal(raceeth_cod),"{'categorias': [np.float64(1.0), np.float64(2.0), np.float64(3.0), np.float64(4.0), np.float64(5.0), np.float64(6.0), np.float64(7.0), np.float64(8.0)]}"
+3,CodificadorNominal(sexo_cod),"{'categorias': [np.float64(1.0), np.float64(2.0)]}"

@@ -2,11 +2,11 @@ columna,tipo,origen,nulos
 peso_muestral,float64,original,0
 estrato,int64,original,0
 psu,int64,original,0
-edad_cod,float64,original,0
+edad_cod,float64,original,55
 salud_mental_cod,float64,original,0
-redes_sociales_cod,float64,original,0
-sueno_cod,float64,original,0
-actividad_fisica_cod,float64,original,0
+redes_sociales_cod,float64,original,3281
+sueno_cod,float64,original,724
+actividad_fisica_cod,float64,original,487
 n_faltantes_analisis,int64,original,0
 caso_completo,int64,original,0
 raza_amerindia,float64,original,174
