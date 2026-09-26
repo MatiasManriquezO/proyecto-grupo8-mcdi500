@@ -4,13 +4,19 @@
 # persona aparece con dos nombres distintos, Git la cuenta como dos autores",
 # y el criterio IV evalúa que las contribuciones sean trazables por integrante.
 #
-# Daniel commiteó con dos identidades distintas (DanielRamirezPerez y
-# d.ramrezprez) sobre el mismo correo. Sin este archivo, `git shortlog -sne`
-# lo muestra como dos personas y sus 9 commits aparecen divididos en 8 + 1.
+# Dos casos en este repositorio:
+#   - Daniel commiteó con dos nombres de usuario (DanielRamirezPerez y
+#     d.ramrezprez) sobre el mismo correo, así que sus commits aparecían
+#     divididos en 8 + 1.
+#   - Roberto commitea con el correo noreply de GitHub, que la plataforma
+#     exige para no exponer la dirección institucional; acá se muestra con
+#     su correo de la universidad, igual que el resto del equipo.
 #
 # Verificar con:  git shortlog -sne
 # La forma es:    Nombre canónico <correo canónico> <correo alternativo>
 
+Abigail Robles Chávez <a.robleschavez@uandresbello.edu>
 Daniel Ramírez Pérez <d.ramrezprez@uandresbello.edu> <d.ramrezprez@uandresbello.edu>
 Matías Manríquez Ortiz <m.manriquezortiz@uandresbello.edu>
 Roberto Sánchez Saldivia <r.snchezsaldivia@uandresbello.edu>
+Roberto Sánchez Saldivia <r.snchezsaldivia@uandresbello.edu> <329774589+RobertSanchezS@users.noreply.github.com>
