@@ -1,0 +1,5 @@
+implementacion,tiempo_min_ms,memoria_pico_kib,veces_mas_lenta
+D bincount,0.098,454.0,1.0
+B zip,2.608,2.7,26.6
+C crosstab,4.633,877.6,47.3
+A iterrows,153.266,49.8,1563.9
