@@ -78,8 +78,17 @@ proyecto-grupo8-mcdi500/
 │     └─ S1_F2_Preprocesamiento.ipynb  Fase 2 — obtención, limpieza y 
 │				transformación
 ├─ F3/
-│  └─ notebooks/
-│     └─ Fase 3.md                    (pendiente: notebook de Fase 3)
+│  ├─ notebooks/
+│  │  └─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
+│  │                                Fase 3 — núcleo algorítmico,
+│  │                                eficiencia y POO
+│  ├─ src/                          núcleo algorítmico de la fase
+│  │  ├─ contingencia.py            tabla q80 × q84, cuatro implementaciones
+│  │  ├─ busqueda.py                búsqueda por identificador (3 versiones)
+│  │  ├─ recursion.py               casos recursivos y alternativa iterativa
+│  │  ├─ medicion.py                medición de tiempo y memoria
+│  │  └─ analisis.py                AnalisisContingencia (clase con estado)
+│  └─ resultados/                   tablas que deja la ejecución (CSV)
 ├─ F4/
 │  └─ notebooks/
 │     └─ Fase 4.md                    (pendiente: notebook de Fase 4)
@@ -120,6 +129,88 @@ Ejecutar los notebooks en orden, desde la raíz del proyecto, seleccionando el
 kernel `Python (grupo8-mcdi500)`:
 1. `F1/notebooks/S1_F1_Definicion.ipynb`
 2. `F2/notebooks/S1_F2_Preprocesamiento.ipynb`
+3. `F3/notebooks/S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb`
+
+### Ejecución del notebook de la Fase 3
+
+Se abre **desde `F3/notebooks/`** y se ejecuta con *Restart Kernel and Run All
+Cells*. Las rutas del cuaderno son relativas a esa carpeta, así que no funciona
+si se abre desde otro directorio.
+
+Lee dos archivos que ya están en el repositorio y **no genera datos nuevos**:
+
+| Entrada | Para qué |
+|---|---|
+| `F1/data/raw/XXH2023_YRBSS_data.csv` | archivo original del CDC: el pipeline de clases parte de aquí |
+| `F2/data/processed/yrbs2023_seleccion_procesada.csv` | salida de la Fase 2: sirve de referencia para verificar |
+
+La comprobación central del cuaderno es que el pipeline reorganizado en clases
+reproduce el CSV de la Fase 2 **carácter por carácter**
+(`pd.testing.assert_frame_equal` más comparación del texto completo). Si esa
+celda falla, la reorganización alteró un resultado y hay que revisarla antes de
+seguir.
+
+Deja en `F3/resultados/` las tablas de la ejecución. El conjunto procesado
+oficial sigue siendo el de la Fase 2: **la Fase 3 no genera datos nuevos**.
+
+### Sobre los valores faltantes
+
+Los datos oficiales del proyecto **no están imputados**, y es una decisión
+documentada (bitácora 2.5), no un descuido. Se verifica así:
+
+```python
+import pandas as pd
+orig = pd.read_csv("F1/data/raw/XXH2023_YRBSS_data.csv", usecols=["q80", "q84"])
+f2 = pd.read_csv("F2/data/processed/yrbs2023_seleccion_procesada.csv")
+print(orig["q80"].isna().sum(), f2["redes_sociales_cod"].isna().sum())   # 4900 4900
+print(orig["q84"].isna().sum(), f2["salud_mental_cod"].isna().sum())     # 4398 4398
+```
+
+Los nulos del archivo del CDC y los del procesado coinciden en las siete
+variables de análisis. El conteo queda registrado en las columnas
+`n_faltantes_analisis` y `caso_completo`, que marcan los faltantes sin
+rellenarlos.
+
+**Por qué no se imputan.** Los faltantes corresponden a no-respuesta y a saltos
+de pregunta del cuestionario, así que no son aleatorios: rellenarlos con la
+mediana o la moda inventaría respuestas y concentraría miles de casos en una
+categoría. Además, las variables son **ordinales 1–8**; imputar un valor central
+y escalar a media 0 / desviación 1 asumiría equidistancia entre categorías, que
+es justamente lo que la nota metodológica de este README descarta.
+
+### Uso de los módulos sin el cuaderno
+
+```python
+import sys; sys.path.insert(0, "F3/src")
+from contingencia import preparar_pares, contar_bincount
+
+pares = preparar_pares(df, "redes_sociales_cod", "salud_mental_cod")
+tabla = contar_bincount(pares, "redes_sociales_cod", "salud_mental_cod")
+```
+
+## Contribuciones por integrante
+
+El criterio de repositorio pide que las contribuciones sean **trazables por
+integrante**. La forma de verificarlo es:
+
+```bash
+git shortlog -sne        # commits por persona
+git log --oneline --author="Apellido"
+```
+
+El archivo `.mailmap` de la raíz unifica las identidades de quien commiteó con
+más de un nombre de usuario sobre el mismo correo. Sin él, Git cuenta a esa
+persona **como dos autores distintos** y sus commits aparecen divididos.
+
+| Integrante | Foco de trabajo en la Fase 3 |
+|---|---|
+| Abigail Robles Chávez | bitácora de decisiones y documentación de la fase |
+| Daniel Ramírez Pérez | notebook de la Fase 3, preprocesamiento |
+| Matías Manríquez Ortiz | notebook de la Fase 3, archivos de ejecución |
+| Roberto Sánchez Saldivia | núcleo algorítmico (`F3/src/`), documentación del repositorio |
+
+El trabajo se reparte por componente, no por archivo: cada integrante toma una
+parte del sistema y la documenta en la bitácora.
 
 ## Documentación (docs/)
 Cada tipo de documento va en su propia subcarpeta, para no mezclar archivos:
@@ -180,8 +271,42 @@ enseñanza media de Estados Unidos.
 
 ## Referencias
 
+Las referencias del proyecto en APA 7. El criterio de aspectos formales pide al
+menos cinco fuentes: dos del material del curso, dos de documentación oficial de
+Python o de las librerías, y una académica de los últimos cinco años. Toda
+fuente listada debe estar citada en el informe o en los notebooks.
+
+**Fuente de los datos**
+
 - Centers for Disease Control and Prevention. (2024). *2023 Youth Risk Behavior
   Survey data* [Conjunto de datos]. https://www.cdc.gov/yrbs/data/index.html
 - Centers for Disease Control and Prevention. (2024). *2023 YRBS data user's
   guide*. https://www.cdc.gov/yrbs/media/pdf/2023/2023_National_YRBS_Data_Users_Guide508.pdf
+
+**Documentación oficial de Python y librerías**
+
 - McKinney, W. (2022). *Python for data analysis* (3.ª ed.). O'Reilly Media.
+- Python Software Foundation. (s. f.). *timeit — Measure execution time of small
+  code snippets*. https://docs.python.org/3/library/timeit.html
+- Python Software Foundation. (s. f.). *tracemalloc — Trace memory allocations*.
+  https://docs.python.org/3/library/tracemalloc.html
+- The pandas development team. (s. f.). *pandas documentation*.
+  https://pandas.pydata.org/docs/
+
+**Arquitectura de software**
+
+- Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). *Design patterns:
+  Elements of reusable object-oriented software*. Addison-Wesley.
+
+**Académica complementaria (últimos cinco años)**
+
+- Gentzler, A. L., Hughes, J. L., Johnston, M., & Alderson, J. E. (2023). Which
+  social media platforms matter and for whom? Examining moderators of links
+  between adolescents' social media use and depressive symptoms. *Journal of
+  Adolescence, 95*(8), 1725–1748. https://doi.org/10.1002/jad.12243
+
+**Material del curso**
+
+- Universidad Andrés Bello. (2026). *MCDI500 Programación para la Ciencia de
+  Datos: Apunte Fase 3* [Material docente]. Magíster en Ciencia de Datos e
+  Inteligencia Artificial.
