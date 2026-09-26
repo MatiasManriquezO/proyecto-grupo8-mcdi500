@@ -94,24 +94,46 @@ proyecto-grupo8-mcdi500/
 │                                       transformación
 ├─ F3/
 │  ├─ notebooks/
-│  │  └─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
-│  │                                Fase 3 — núcleo algorítmico,
-│  │                                eficiencia y POO
-│  ├─ src/                          núcleo algorítmico de la fase
+│  │  ├─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
+│  │  │                             Formativa 3 — POO, eficiencia, recursión y
+│  │  │                             patrones; pipeline armado desde la configuración
+│  │  └─ S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb
+│  │                                Sumativa 2 — pipeline real de F2 en 12 clases;
+│  │                                reproduce el CSV de F2 carácter por carácter
+│  ├─ src/                          núcleo algorítmico (scripts y mediciones)
+│  │  ├─ __init__.py
 │  │  ├─ contingencia.py            tabla q80 × q84, cuatro implementaciones
 │  │  ├─ busqueda.py                búsqueda por identificador (3 versiones)
 │  │  ├─ recursion.py               casos recursivos y alternativa iterativa
 │  │  ├─ medicion.py                medición de tiempo y memoria
 │  │  └─ analisis.py                AnalisisContingencia (clase con estado)
-│  ├─ data/processed/               salidas de la ejecución del cuaderno
-│  └─ resultados/                   tablas de contingencia y de eficiencia
+│  ├─ data/_demo/                   salidas de demostración de la Formativa 3
+│  │  ├─ demo_entrenamiento.csv     entrenamiento procesado (12.564 × 33)
+│  │  ├─ demo_prueba.csv            prueba procesada (3.141 × 33)
+│  │  ├─ demo_diccionario.csv       columna, tipo, origen y nulos
+│  │  ├─ demo_parametros.csv        lo que aprendió cada paso
+│  │  └─ demo_entrenamiento_config*.csv   pipeline armado desde la configuración
+│  └─ resultados/
+│     ├─ tabla4_implementaciones.csv   núcleo (F3/src): cuatro conteos q80 × q84
+│     ├─ tabla5_busqueda.csv           núcleo: búsqueda lineal, binaria e índice
+│     ├─ tabla6_recursion.csv          núcleo: casos de recursión evaluados
+│     ├─ tabla7_modulos.csv            núcleo: los cinco módulos de F3/src
+│     ├─ tabla_proporciones.csv        núcleo: salud mental por nivel de uso
+│     ├─ arquitectura_codigo.csv       núcleo: componentes por capa
+│     ├─ parametros_pipeline_f3.csv    Sumativa 2: lo que aprendió cada clase
+│     ├─ bitacora_ejecucion_f3.csv     Sumativa 2: bitácora generada por Observer
+│     ├─ arquitectura_f3.csv           Sumativa 2: clases del pipeline
+│     ├─ eficiencia_faltantes_f3.csv   Sumativa 2: bucle, apply y vectorizada
+│     └─ eficiencia_crecimiento_f3.csv Sumativa 2: crecimiento con el tamaño
 ├─ F4/
 │  └─ notebooks/
 │     └─ Fase 4.md                  (pendiente: notebook de Fase 4)
 ├─ docs/                            documentación transversal al proyecto
 │  ├─ bitacora_decisiones.md        registro de decisiones técnicas
 │  ├─ diccionario_variables.md      diccionario de variables del dataset
-│  ├─ Informe/
+│  ├─ Informe/                      informes entregados (PDF)
+│  │  ├─ f1_s01_evaluacion_entregable_grupo8.pdf
+│  │  └─ f3_s02_formativa3_grupo8.pdf
 │  └─ Mapa Conceptual Proyecto/
 ├─ .gitignore
 ├─ .mailmap                         unifica las identidades Git del equipo
@@ -120,9 +142,14 @@ proyecto-grupo8-mcdi500/
 ```
 
 **Dónde buscar cada cosa.** La documentación específica de una fase vive dentro
-de esa fase (`F1/data/docs/`, `F2/docs/`); `docs/` guarda lo que cruza todo el
-proyecto: la bitácora de decisiones, el diccionario general, el informe y el
-mapa conceptual.
+de esa fase (`F1/data/docs/`, `F2/docs/`, `F3/resultados/`); `docs/` guarda lo que
+cruza todo el proyecto: la bitácora de decisiones, el diccionario general, los
+informes y el mapa conceptual.
+
+**Datos oficiales y salidas de demostración.** El único conjunto procesado oficial
+es `F2/data/processed/yrbs2023_seleccion_procesada.csv`. Lo que queda en
+`F3/data/_demo/` son salidas de la Formativa 3 que documentan la ejecución del
+notebook; no lo reemplazan y la Fase 4 no las usa.
 
 
 ### Módulo `src/procesamiento.py`
@@ -152,9 +179,28 @@ Ejecutar los notebooks en orden, desde la raíz del proyecto, seleccionando el
 kernel `Python (grupo8-mcdi500)`:
 1. `F1/notebooks/S1_F1_Definicion.ipynb`
 2. `F2/notebooks/S1_F2_Preprocesamiento.ipynb`
-3. `F3/notebooks/S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb`
+3. `F3/notebooks/S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3)
+4. `F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2)
 
-### Ejecución del notebook de la Fase 3
+### Fase 3 · Formativa 3: `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb`
+
+Se ejecuta con *Restart Kernel and Run All Cells* (110 celdas, 45 de código).
+Igual que F1 y F2, localiza la raíz del repositorio con `encontrar_raiz()`, así
+que funciona desde cualquier carpeta del repositorio.
+
+| Qué hace | Evidencia en el notebook |
+|---|---|
+| Lee `F2/data/processed/yrbs2023_seleccion_procesada.csv` y verifica su esquema | 20.103 × 26, 8 columnas declaradas |
+| Reorganiza el código en clases: encapsulamiento, herencia y polimorfismo | `Transformador` y sus clases hijas; `Pipeline` |
+| Mide tiempo y memoria (`timeit`, `tracemalloc`) y el crecimiento con el tamaño | bucle frente a `pd.cut`; Fibonacci ingenuo frente a memoizado |
+| Aplica patrones de diseño: Strategy (principal), Factory, Observer y Singleton | `ImputadorFlexible`, `construir_pipeline`, `Bitacora` |
+| Arma el pipeline desde la configuración respetando F2 | `IMPUTAR_ORDINALES = False`, `ESCALAR_ORDINALES = False` |
+| Verifica el resultado con seis controles | VERIFICACIÓN APROBADA: 15.705 filas, 5.687 NA conservados |
+
+Los ejemplos de imputación y escalamiento de las partes 1 a 11 son didácticos y
+se aplican sobre una sola columna. Deja sus salidas en `F3/data/_demo/`.
+
+### Fase 3 · Sumativa 2: `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb`
 
 Se abre **desde `F3/notebooks/`** y se ejecuta con *Restart Kernel and Run All
 Cells*. Las rutas del cuaderno son relativas a esa carpeta, así que no funciona
@@ -173,8 +219,15 @@ reproduce el CSV de la Fase 2 **carácter por carácter**
 celda falla, la reorganización alteró un resultado y hay que revisarla antes de
 seguir.
 
-Deja en `F3/resultados/` las tablas de la ejecución. El conjunto procesado
-oficial sigue siendo el de la Fase 2: **la Fase 3 no genera datos nuevos**.
+Deja en `F3/resultados/` las tablas de la ejecución (`*_f3.csv`). El conjunto
+procesado oficial sigue siendo el de la Fase 2: **la Fase 3 no genera datos nuevos**.
+
+### Núcleo algorítmico `F3/src/`
+
+Los cinco módulos de `F3/src/` contienen los scripts del núcleo algorítmico y sus
+mediciones de complejidad (tabla de contingencia q80 × q84, búsqueda por
+identificador, recursión y medición). Sus resultados están en
+`F3/resultados/tabla*.csv`, `tabla_proporciones.csv` y `arquitectura_codigo.csv`.
 
 ### Sobre los valores faltantes
 
@@ -272,7 +325,7 @@ de dos puntos y una descripción breve en presente. Lo que decide el prefijo es
 
 ## Decisiones técnicas
 
-Bitácora de decisiones tomadas durante F1–F2. Cada entrada registra la decisión
+Bitácora de decisiones tomadas durante F1–F3. Cada entrada registra la decisión
 y la cifra que la respalda; este registro alimenta directamente la sección de
 metodología del informe.
 
@@ -284,6 +337,17 @@ metodología del informe.
 | 4 | Clasificar `q1`, `q76`, `q80`, `q84`, `q85` como **ordinales** | Discrepancia documentada con el validador automático, que las lee como discretas por ser enteros 1–8 |
 | 5 | **No ponderar** en F1–F2 | Ponderar exige análisis de encuestas complejas (varianza por conglomerados), fuera del alcance de esta etapa. Las columnas `weight`, `stratum` y `psu` se conservan para fases posteriores |
 | 6 | No imputar faltantes de las variables seleccionadas | Según Apéndice C del codebook, ninguna depende de una pregunta previa: sus nulos son *no responde* genuino, no *no aplica* estructural |
+
+Las decisiones de la Fase 3 (F3.1 a F3.18) y de infraestructura del repositorio
+están en `docs/bitacora_decisiones.md`. Las más relevantes:
+
+| # | Decisión | Evidencia |
+|---|---|---|
+| F3.1 | La Fase 3 no genera datos nuevos: parte del CSV de la Fase 2 | El conjunto oficial sigue siendo `F2/data/processed/yrbs2023_seleccion_procesada.csv` |
+| F3.11 | Separar `ajustar` de `transformar` en cada paso | La media de `edad_cod` escalada en prueba es −0,013 y no 0: los parámetros vienen solo del entrenamiento |
+| F3.13 | Armar el pipeline desde la configuración sin imputar ni escalar | 5.687 NA conservados y códigos del codebook intactos; seis controles OK |
+| F3.16 | Strategy como patrón principal, aplicado a los faltantes | Rellenar con moda o mediana inventa 4.398 respuestas y desvía la distribución en 15,3 pp |
+| F3.18 | El pipeline de clases debe reproducir el resultado de F2 | Archivo idéntico carácter por carácter (Sumativa 2) |
 
 **Limitación declarada:** al no aplicar ponderación muestral, todo resultado 
 descriptivo de este proyecto describe la muestra de 20.103 estudiantes

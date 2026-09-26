@@ -74,6 +74,14 @@ directamente la sección de metodología del informe.
 | F3.8 | Reportar **razones** entre implementaciones, no tiempos absolutos | Los milisegundos dependen del equipo; las razones se mantienen entre máquinas. Es la única forma de que la medición sea reproducible por el equipo docente |
 | F3.9 | Incorporar **una sola clase**, `AnalisisContingencia` | Una clase se justifica cuando el componente necesita recordar algo entre llamadas. Las demás piezas son funciones puras: convertirlas en clases habría agregado estado sin motivo |
 | F3.10 | Separar el código en cinco módulos por responsabilidad | Cada archivo tiene un propósito enunciable en una frase (alta cohesión) y `medicion.py` no conoce ninguna función del proyecto (bajo acoplamiento): puede medir cualquier implementación nueva sin modificarse |
+| F3.11 | Reorganizar cada paso del pipeline como clase hija de `Transformador`, con `ajustar` y `transformar` separados | Evita la fuga de datos: la media de `edad_cod` escalada en prueba es −0,013 y no 0, porque los parámetros vienen solo del entrenamiento. Transformar sin ajustar lanza `RuntimeError` |
+| F3.12 | Separar entrenamiento y prueba solo con los registros que respondieron `salud_mental_cod` | La variable objetivo no se imputa (2.5): 15.705 de 20.103 registros, 12.564 de entrenamiento y 3.141 de prueba (80/20, semilla 42) |
+| F3.13 | Armar el pipeline desde la configuración con `IMPUTAR_ORDINALES = False` y `ESCALAR_ORDINALES = False` | Respeta 2.4 y 2.5: conserva 5.687 NA en las cuatro escalas ordinales y deja los códigos del codebook intactos. Seis controles OK («VERIFICACIÓN APROBADA») |
+| F3.14 | Localizar la raíz del repositorio con `encontrar_raiz()` en el notebook de la Formativa 3 | Misma convención de F1 y F2: el notebook corre en cualquier computador del grupo sin editar rutas |
+| F3.15 | Guardar las salidas de la Formativa 3 en `F3/data/_demo/` con prefijo `demo_` | Son evidencia de la ejecución, no datos oficiales: el conjunto oficial sigue siendo el de F2 (F3.1) |
+| F3.16 | Adoptar **Strategy** como patrón principal, aplicado al tratamiento de faltantes | En la Sumativa 2, rellenar con moda o mediana inventa 4.398 respuestas de salud mental y desvía su distribución en 15,3 puntos porcentuales; conservar NA no la desvía (0,0) |
+| F3.17 | Adoptar la versión vectorizada (`pd.cut`) para clasificar horas de sueño desde el tamaño real | Con 1.000 filas es más lenta que el bucle (razón 0,4), pero gana desde 5.000 filas: 3,7 veces con 20.000 y 5,1 con 50.000. Costo: unas tres veces más memoria (0,51 frente a 0,17 MB) |
+| F3.18 | Verificar el pipeline de clases contra el archivo de F2, no contra código reescrito | Formativa 3: las 8 columnas `raza_*` coinciden en 19.733 filas y las 370 sin raza siguen como NA. Sumativa 2: el pipeline de 12 clases reproduce el CSV de F2 carácter por carácter |
 
 **Resultados persistidos** en `F3/resultados/`, cada uno releído tras guardarse
 para verificar la escritura:
@@ -86,6 +94,13 @@ para verificar la escritura:
 | `tabla7_modulos.csv` | Los cinco módulos, leídos de sus propios docstrings |
 | `tabla_proporciones.csv` | Prevalencia de salud mental deteriorada por nivel de uso |
 | `arquitectura_codigo.csv` | Componentes por capa, generado leyendo el código real |
+| `parametros_pipeline_f3.csv` | Sumativa 2: lo que aprendió cada una de las 12 clases del pipeline |
+| `bitacora_ejecucion_f3.csv` | Sumativa 2: filas, columnas y tiempo de cada paso, registrados por el patrón Observer |
+| `arquitectura_f3.csv` | Sumativa 2: clase base, clases hijas, estrategias y orquestadores |
+| `eficiencia_faltantes_f3.csv` | Sumativa 2: conteo de faltantes por fila con bucle, `apply` y vectorizado |
+| `eficiencia_crecimiento_f3.csv` | Sumativa 2: cómo crece el costo de las tres versiones con el tamaño |
+
+Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 
 **Cifras verificadas de esta fase** (n = 20.103):
 
@@ -111,6 +126,8 @@ para verificar la escritura:
 | 3.5 | Mover `F2/src/` → `src/` en la raíz | El README y el informe declaraban `src/` en la raíz; se unifica con lo declarado |
 | 3.6 | Crear `F2/data/processed/` | Declarada en el README como salida del pipeline y entrada de la Fase 3 |
 | 3.7 | Mantener un único `requirements.txt` en la raíz | Se regenera con `pip freeze` tras cada instalación |
+| 3.8 | Eliminar `F3/data/processed/` | Contenía salidas de una versión anterior del notebook de F3 que imputaba y escalaba las escalas ordinales, en contra de 2.4 y 2.5. Se reemplaza por `F3/data/_demo/` |
+| 3.9 | Versionar los dos notebooks de F3 por separado | `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3) y `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2): cada entrega queda trazable en su propio archivo |
 
 ---
 
