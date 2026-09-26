@@ -1,0 +1,7 @@
+capa,componente,responsabilidad,archivo
+Entrada (F2),"cargar_datos, clasificar_variables, diagnosticar_datos, guardar_dataset, seleccionar_columnas, transformar_datos, validar_datos, verificar_dominios",Garantizar que el dataset cumple el contrato de la Fase 2,src/procesamiento.py
+Núcleo,"contar_bincount, contar_crosstab, contar_iterrows, contar_zip, preparar_pares, proporcion_por_fila",Contar pares y derivar el indicador,F3/src/contingencia.py
+Núcleo,"buscar_binaria_rec, buscar_en_indice, buscar_lineal, construir_indice",Recuperar registros por id,F3/src/busqueda.py
+Núcleo,"aplanar, contar_dyv, contar_iterativo, contar_recursivo_lineal",Recursión donde se justifica,F3/src/recursion.py
+Soporte,"comparar, medir, medir_memoria, medir_tiempo",Medir tiempo y memoria de cualquier función,F3/src/medicion.py
+Soporte,AnalisisContingencia,Coordinar el análisis conservando estado,F3/src/analisis.py

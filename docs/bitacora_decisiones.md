@@ -60,6 +60,46 @@ directamente la sección de metodología del informe.
 
 ---
 
+## Fase 3 — Núcleo algorítmico, eficiencia y POO
+
+| # | Decisión | Evidencia |
+|---|---|---|
+| F3.1 | **No generar datos nuevos**: la Fase 3 parte del CSV de la Fase 2 | El conjunto oficial sigue siendo `F2/data/processed/yrbs2023_seleccion_procesada.csv`. La guía de la evaluación lo dice expresamente: «No hay datos nuevos ni pipeline nuevo. Lo que cambia es la arquitectura del código» |
+| F3.2 | Acotar el núcleo algorítmico al cruce `q80` × `q84` | 11.602 pares válidos de 20.103 registros (57,7 %): son los estudiantes que respondieron ambas preguntas. La tabla resultante tiene 8 × 5 = 40 celdas que suman 11.602 |
+| F3.3 | Comparar **cuatro** implementaciones del mismo conteo antes de elegir | `iterrows`, diccionario, `crosstab` y `bincount` producen las 40 celdas idénticas. La equivalencia se comprueba con `assert` antes de medir: una versión más rápida que entrega otro resultado es un error, no una optimización |
+| F3.4 | Adoptar `bincount` como implementación del conteo | Es la más rápida del grupo por dos órdenes de magnitud frente a `iterrows`. La medición cambió la decisión: `iterrows` era la forma intuitiva de escribirlo |
+| F3.5 | **Descartar** la recursión lineal para recorrer filas | Lanza `RecursionError` sobre ~1.000 filas: el límite de profundidad de Python impide aplicarla a las 20.103 del conjunto |
+| F3.6 | **Descartar** también *divide y vencerás* para el conteo | Funciona con profundidad ⌈log₂ 20.103⌉ = 15, pero tarda 8,11 ms frente a 6,42 ms del bucle iterativo. Un recorrido secuencial no gana nada partiéndose en dos |
+| F3.7 | **Conservar** la recursión solo donde la profundidad es desconocida | `aplanar()` recorre metadatos anidados cuya profundidad puede crecer, y `buscar_binaria_rec()` resulta ~218 veces más rápida que la búsqueda lineal en 1.000 consultas |
+| F3.8 | Reportar **razones** entre implementaciones, no tiempos absolutos | Los milisegundos dependen del equipo; las razones se mantienen entre máquinas. Es la única forma de que la medición sea reproducible por el equipo docente |
+| F3.9 | Incorporar **una sola clase**, `AnalisisContingencia` | Una clase se justifica cuando el componente necesita recordar algo entre llamadas. Las demás piezas son funciones puras: convertirlas en clases habría agregado estado sin motivo |
+| F3.10 | Separar el código en cinco módulos por responsabilidad | Cada archivo tiene un propósito enunciable en una frase (alta cohesión) y `medicion.py` no conoce ninguna función del proyecto (bajo acoplamiento): puede medir cualquier implementación nueva sin modificarse |
+
+**Resultados persistidos** en `F3/resultados/`, cada uno releído tras guardarse
+para verificar la escritura:
+
+| Archivo | Contenido |
+|---|---|
+| `tabla4_implementaciones.csv` | Las cuatro implementaciones del conteo, con tiempo y memoria |
+| `tabla5_busqueda.csv` | Búsqueda lineal, binaria e índice sobre 1.000 consultas |
+| `tabla6_recursion.csv` | Casos de recursión evaluados y la decisión de cada uno |
+| `tabla7_modulos.csv` | Los cinco módulos, leídos de sus propios docstrings |
+| `tabla_proporciones.csv` | Prevalencia de salud mental deteriorada por nivel de uso |
+| `arquitectura_codigo.csv` | Componentes por capa, generado leyendo el código real |
+
+**Cifras verificadas de esta fase** (n = 20.103):
+
+| Medida | Valor |
+|---|---|
+| Pares válidos `q80` × `q84` | 11.602 (57,7 % del total) |
+| Celdas de la tabla de contingencia | 40 (8 niveles × 5 niveles) |
+| Prevalencia de salud mental deteriorada | 20,3 % en el nivel 1 (no usa) → 35,3 % en el nivel 8 (más de una vez por hora). El aumento es casi monótono: el nivel 2 baja a 17,6 %, único quiebre de la serie |
+| Faltantes conservados, sin imputar | 13.813 en las siete variables de análisis |
+| Profundidad de *divide y vencerás* | ⌈log₂ 20.103⌉ = 15 |
+| Límite de la recursión lineal | `RecursionError` sobre ~1.000 filas |
+
+---
+
 ## Infraestructura del repositorio
 
 | # | Decisión | Evidencia |

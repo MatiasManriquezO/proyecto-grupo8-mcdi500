@@ -1,0 +1,5 @@
+caso,profundidad,resultado,decision
+Contar respuestas de q84 con recursión lineal,n (una llamada por fila),RecursionError sobre ~1000 filas (límite de Python),Descartada
+Mismo conteo con divide y vencerás,⌈log₂ n⌉ = 15,"Funciona, pero 8.11 ms frente a 6.42 ms del bucle",Descartada: recorrido secuencial
+Búsqueda binaria por id,⌈log₂ n⌉ = 15,218 veces más rápida que la lineal,Adoptada como alternativa
+aplanar metadatos anidados,Desconocida,4 claves planas desde un diccionario de 3 niveles,Adoptada: la profundidad no se conoce al escribir el código

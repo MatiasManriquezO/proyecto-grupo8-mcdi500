@@ -1,0 +1,6 @@
+archivo,contenido,definiciones,por_que_modulo_propio
+F3/src/contingencia.py,contingencia.py — Núcleo algorítmico de la Fase 3.,6,Es el núcleo del análisis y lo usará la Fase 4
+F3/src/busqueda.py,busqueda.py — Recuperación de registros por identificador.,4,Responsabilidad distinta: recuperar registros
+F3/src/recursion.py,recursion.py — Casos recursivos evaluados y su alternativa iterativa.,4,Agrupa las decisiones sobre recursión
+F3/src/medicion.py,medicion.py — Instrumentos de medición de tiempo y memoria.,4,Independiente de qué se mide: reutilizable
+F3/src/analisis.py,analisis.py — Componente con estado del análisis de contingencia.,1,Componente con estado
