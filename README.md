@@ -61,22 +61,37 @@ colaborativo.
   pregunta** del cuestionario (no aplica), no a suciedad del archivo.
 
 ## Estructura del repositorio
+
+Cada fase guarda sus propios datos y su propia documentación. En `docs/` queda
+solo lo transversal al proyecto completo.
+
 ```
 proyecto-grupo8-mcdi500/
 ├─ src/
-│  └─ procesamiento.py    	funciones: carga, selección, diagnóstico,
-│                          	clasificación, transformación, validación
+│  └─ procesamiento.py              funciones compartidas por todas las fases:
+│                                   carga, selección, diagnóstico,
+│                                   clasificación, transformación, validación
 ├─ F1/
 │  ├─ data/raw/
-│  │  └─ XXH2023_YRBSS_data.csv      dataset original YRBS 2023 (CDC)
+│  │  └─ XXH2023_YRBSS_data.csv     dataset original YRBS 2023 (CDC)
+│  ├─ data/docs/                    documentación de la Fase 1
+│  │  ├─ diccionario_variables_f1.csv
+│  │  ├─ evaluacion_criterios_dataset.csv
+│  │  ├─ metadatos_fase1.json
+│  │  └─ vinculacion_mapa_conceptual.csv
 │  └─ notebooks/
-│     └─ S1_F1_Definicion.ipynb	Fase 1 — definición problema y 
-│					entorno
+│     └─ S1_F1_Definicion.ipynb     Fase 1 — definición del problema y entorno
 ├─ F2/
-│  ├─ data/processed/             salida del pipeline (entrada de F3)
+│  ├─ data/processed/
+│  │  └─ yrbs2023_seleccion_procesada.csv   salida del pipeline: el conjunto
+│  │                                        oficial del proyecto
+│  ├─ docs/                         documentación de la Fase 2
+│  │  ├─ diccionario_variables_f2.csv
+│  │  ├─ metadatos_f2.csv
+│  │  └─ registro_preprocesamiento_f2.csv
 │  └─ notebooks/
-│     └─ S1_F2_Preprocesamiento.ipynb  Fase 2 — obtención, limpieza y 
-│				transformación
+│     └─ S1_F2_Preprocesamiento.ipynb   Fase 2 — obtención, limpieza y
+│                                       transformación
 ├─ F3/
 │  ├─ notebooks/
 │  │  └─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
@@ -88,19 +103,27 @@ proyecto-grupo8-mcdi500/
 │  │  ├─ recursion.py               casos recursivos y alternativa iterativa
 │  │  ├─ medicion.py                medición de tiempo y memoria
 │  │  └─ analisis.py                AnalisisContingencia (clase con estado)
-│  └─ resultados/                   tablas que deja la ejecución (CSV)
+│  ├─ data/processed/               salidas de la ejecución del cuaderno
+│  └─ resultados/                   tablas de contingencia y de eficiencia
 ├─ F4/
 │  └─ notebooks/
-│     └─ Fase 4.md                    (pendiente: notebook de Fase 4)
-├─ docs/
-│  ├─ bitacora_decisiones.md 		registro de decisiones técnicas
-│  ├─ diccionario_variables.md 	diccionario de variables data set
+│     └─ Fase 4.md                  (pendiente: notebook de Fase 4)
+├─ docs/                            documentación transversal al proyecto
+│  ├─ bitacora_decisiones.md        registro de decisiones técnicas
+│  ├─ diccionario_variables.md      diccionario de variables del dataset
 │  ├─ Informe/
 │  └─ Mapa Conceptual Proyecto/
 ├─ .gitignore
-├─ requirements.txt     dependencias del proyecto (único, en la raíz)
+├─ .mailmap                         unifica las identidades Git del equipo
+├─ requirements.txt                 dependencias del proyecto (único, en la raíz)
 └─ README.md
 ```
+
+**Dónde buscar cada cosa.** La documentación específica de una fase vive dentro
+de esa fase (`F1/data/docs/`, `F2/docs/`); `docs/` guarda lo que cruza todo el
+proyecto: la bitácora de decisiones, el diccionario general, el informe y el
+mapa conceptual.
+
 
 ### Módulo `src/procesamiento.py`
 
