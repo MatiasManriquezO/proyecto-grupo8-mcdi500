@@ -1,0 +1,13 @@
+orden,paso,clase,parametros
+1,EliminadorColumnaVacia(orig_rec),EliminadorColumnaVacia,{'pct_nulos': 100.0}
+2,SeleccionadorColumnas(columnas de análisis),SeleccionadorColumnas,"{'columnas_entrada': 116, 'columnas_salida': 11}"
+3,MarcadorFaltantes(bandera de faltantes),MarcadorFaltantes,"{'variables': 7, 'casos_completos': 10941}"
+4,TratamientoFaltantes(faltantes),TratamientoFaltantes,"{'estrategia': 'conservar NA', 'nulos_antes': 13813}"
+5,CastearCodigos(códigos a Int64),CastearCodigos,{'columnas': 7}
+6,ConversorOrdinal(escalas ordinales),ConversorOrdinal,"{'escalas': {'edad_cod': 7, 'redes_sociales_cod': 8, 'salud_mental_cod': 5, 'sueno_cod': 7, 'actividad_fisica_cod': 8}}"
+7,CodificadorOneHot(raceeth_cod),CodificadorOneHot,"{'columnas_nuevas': ['raza_amerindia', 'raza_asiatica', 'raza_negra', 'raza_hawaiana_pacifico', 'raza_blanca', 'raza_hispana', 'raza_multiple_hispana', 'raza_multiple_no_hispana']}"
+8,IndicadorBinario(sexo_cod),IndicadorBinario,"{'positivos': [1], 'pct_positivos': 49.6}"
+9,IndicadorBinario(salud_mental_cod),IndicadorBinario,"{'positivos': [4, 5], 'pct_positivos': 30.6}"
+10,IndicadorBinario(redes_sociales_cod),IndicadorBinario,"{'positivos': [6, 7, 8], 'pct_positivos': 78.1}"
+11,IndicadorBinario(sueno_cod),IndicadorBinario,"{'positivos': [5, 6, 7], 'pct_positivos': 23.0}"
+12,IndicadorBinario(actividad_fisica_cod),IndicadorBinario,"{'positivos': [6, 7, 8], 'pct_positivos': 48.0}"

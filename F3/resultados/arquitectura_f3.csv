@@ -1,0 +1,23 @@
+componente,rol,uso,responsabilidad,archivo sugerido
+Transformador,clase base,proyecto y didáctico,Define el contrato y controla el estado de cada paso,F3/src/transformadores.py
+ImputadorMediana,clase hija,didáctico,Rellena los nulos con la mediana aprendida.,F3/src/transformadores.py
+CodificadorNominal,clase hija,didáctico,Convierte una columna de categorías en columnas 0/1.,F3/src/transformadores.py
+EscaladorEstandar,clase hija,didáctico,Centra en cero y escala a desviación uno.,F3/src/transformadores.py
+EliminadorColumnas,clase hija,didáctico,"Quita columnas que no aportan al análisis, como el identificador.",F3/src/transformadores.py
+ImputadorFlexible,clase hija,didáctico,No sabe imputar: sabe cuándo. El cómo lo aporta la estrategia.,F3/src/transformadores.py
+EliminadorColumnaVacia,clase hija,proyecto,Elimina una columna solo si está 100 % vacía (bitácora 2.1).,F3/src/transformadores.py
+SeleccionadorColumnas,clase hija,proyecto,Selecciona y renombra las columnas de análisis (bitácora 2.3).,F3/src/transformadores.py
+MarcadorFaltantes,clase hija,proyecto,Agrega la bandera de faltantes: cuántas variables faltan y si el caso está completo.,F3/src/transformadores.py
+CastearCodigos,clase hija,proyecto,"Convierte códigos float64 a entero Int64, conservando los faltantes (bitácora 2.4).",F3/src/transformadores.py
+ConversorOrdinal,clase hija,proyecto,Declara el orden de las escalas ordinales con el orden del codebook.,F3/src/transformadores.py
+CodificadorOneHot,clase hija,proyecto,Codifica una nominal en columnas 0/1 con nombres declarados; <NA> donde falta.,F3/src/transformadores.py
+IndicadorBinario,clase hija,proyecto,Crea una columna 0/1 que vale 1 si el código está en los valores positivos.,F3/src/transformadores.py
+TratamientoFaltantes,clase hija,proyecto,No sabe tratar faltantes: sabe cuándo hacerlo. El cómo lo aporta la estrategia.,F3/src/transformadores.py
+ConservarFaltantes,estrategia (Strategy),proyecto,Estrategia del proyecto (bitácora 2.5): los faltantes se conservan como NA.,F3/src/estrategias.py
+RellenarModa,estrategia (Strategy),proyecto,Alternativa evaluada en F2: rellenar con la categoría más frecuente.,F3/src/estrategias.py
+RellenarMediana,estrategia (Strategy),proyecto,Alternativa evaluada en F2: rellenar con la mediana del código.,F3/src/estrategias.py
+Pipeline,orquestador,proyecto,Encadena los pasos y controla el orden de ajuste,F3/src/pipeline.py
+PipelineObservable,orquestador (Observer),proyecto,Pipeline que además notifica cada paso a sus observadores,F3/src/pipeline.py
+Bitacora,observador,proyecto,Registra lo ocurrido en cada paso de la ejecución,F3/src/pipeline.py
+construir_pipeline_proyecto,fábrica (Factory),proyecto,Arma el pipeline desde las constantes declaradas,F3/src/pipeline.py
+medir,utilidad,proyecto,Mide tiempo y memoria de cualquier función,F3/src/medicion.py

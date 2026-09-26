@@ -1,0 +1,13 @@
+paso,filas,columnas,segundos
+EliminadorColumnaVacia(orig_rec),20103,116,0.01292
+SeleccionadorColumnas(columnas de análisis),20103,11,0.00867
+MarcadorFaltantes(bandera de faltantes),20103,13,0.00506
+TratamientoFaltantes(faltantes),20103,13,0.00147
+CastearCodigos(códigos a Int64),20103,13,0.00455
+ConversorOrdinal(escalas ordinales),20103,13,0.00424
+CodificadorOneHot(raceeth_cod),20103,21,0.00647
+IndicadorBinario(sexo_cod),20103,22,0.00656
+IndicadorBinario(salud_mental_cod),20103,23,0.00707
+IndicadorBinario(redes_sociales_cod),20103,24,0.00783
+IndicadorBinario(sueno_cod),20103,25,0.00825
+IndicadorBinario(actividad_fisica_cod),20103,26,0.00797
