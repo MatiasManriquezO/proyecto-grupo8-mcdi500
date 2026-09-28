@@ -1,0 +1,122 @@
+nivel,segmento,n,positivos,pct
+0,total,15705,4808,30.6
+1,redes_sociales_cod=1,784,159,20.3
+2,redes_sociales_cod=1 > sexo_cod=1,293,80,27.3
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=1,2,0,0.0
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=2,1,0,0.0
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=3,44,11,25.0
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=4,104,32,30.8
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=5,71,16,22.5
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=6,46,12,26.1
+3,redes_sociales_cod=1 > sexo_cod=1 > edad_cod=7,24,9,37.5
+2,redes_sociales_cod=1 > sexo_cod=2,485,79,16.3
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=1,2,0,0.0
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=3,60,14,23.3
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=4,132,25,18.9
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=5,122,16,13.1
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=6,109,17,15.6
+3,redes_sociales_cod=1 > sexo_cod=2 > edad_cod=7,58,7,12.1
+1,redes_sociales_cod=2,307,54,17.6
+2,redes_sociales_cod=2 > sexo_cod=1,89,22,24.7
+3,redes_sociales_cod=2 > sexo_cod=1 > edad_cod=3,12,4,33.3
+3,redes_sociales_cod=2 > sexo_cod=1 > edad_cod=4,33,9,27.3
+3,redes_sociales_cod=2 > sexo_cod=1 > edad_cod=5,22,3,13.6
+3,redes_sociales_cod=2 > sexo_cod=1 > edad_cod=6,14,4,28.6
+3,redes_sociales_cod=2 > sexo_cod=1 > edad_cod=7,8,2,25.0
+2,redes_sociales_cod=2 > sexo_cod=2,213,30,14.1
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=1,2,1,50.0
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=3,17,1,5.9
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=4,47,6,12.8
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=5,52,10,19.2
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=6,53,6,11.3
+3,redes_sociales_cod=2 > sexo_cod=2 > edad_cod=7,42,6,14.3
+1,redes_sociales_cod=3,175,38,21.7
+2,redes_sociales_cod=3 > sexo_cod=1,80,17,21.2
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=2,1,0,0.0
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=3,7,0,0.0
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=4,21,8,38.1
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=5,21,6,28.6
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=6,21,3,14.3
+3,redes_sociales_cod=3 > sexo_cod=1 > edad_cod=7,9,0,0.0
+2,redes_sociales_cod=3 > sexo_cod=2,92,20,21.7
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=1,1,0,0.0
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=2,1,1,100.0
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=3,17,3,17.6
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=4,21,4,19.0
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=5,25,4,16.0
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=6,17,6,35.3
+3,redes_sociales_cod=3 > sexo_cod=2 > edad_cod=7,10,2,20.0
+1,redes_sociales_cod=4,537,139,25.9
+2,redes_sociales_cod=4 > sexo_cod=1,240,85,35.4
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=1,2,1,50.0
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=3,23,9,39.1
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=4,57,23,40.4
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=5,55,20,36.4
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=6,67,19,28.4
+3,redes_sociales_cod=4 > sexo_cod=1 > edad_cod=7,36,13,36.1
+2,redes_sociales_cod=4 > sexo_cod=2,294,53,18.0
+3,redes_sociales_cod=4 > sexo_cod=2 > edad_cod=3,23,2,8.7
+3,redes_sociales_cod=4 > sexo_cod=2 > edad_cod=4,62,11,17.7
+3,redes_sociales_cod=4 > sexo_cod=2 > edad_cod=5,78,17,21.8
+3,redes_sociales_cod=4 > sexo_cod=2 > edad_cod=6,84,15,17.9
+3,redes_sociales_cod=4 > sexo_cod=2 > edad_cod=7,44,8,18.2
+1,redes_sociales_cod=5,674,166,24.6
+2,redes_sociales_cod=5 > sexo_cod=1,236,82,34.7
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=1,2,1,50.0
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=3,20,6,30.0
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=4,76,27,35.5
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=5,60,18,30.0
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=6,46,17,37.0
+3,redes_sociales_cod=5 > sexo_cod=1 > edad_cod=7,32,13,40.6
+2,redes_sociales_cod=5 > sexo_cod=2,434,80,18.4
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=2,1,0,0.0
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=3,39,10,25.6
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=4,133,18,13.5
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=5,112,22,19.6
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=6,85,18,21.2
+3,redes_sociales_cod=5 > sexo_cod=2 > edad_cod=7,64,12,18.8
+1,redes_sociales_cod=6,4587,1394,30.4
+2,redes_sociales_cod=6 > sexo_cod=1,2361,955,40.4
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=2,2,0,0.0
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=3,283,116,41.0
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=4,579,217,37.5
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=5,637,271,42.5
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=6,581,237,40.8
+3,redes_sociales_cod=6 > sexo_cod=1 > edad_cod=7,278,113,40.6
+2,redes_sociales_cod=6 > sexo_cod=2,2213,432,19.5
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=1,1,0,0.0
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=2,3,0,0.0
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=3,180,30,16.7
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=4,560,89,15.9
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=5,624,138,22.1
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=6,555,113,20.4
+3,redes_sociales_cod=6 > sexo_cod=2 > edad_cod=7,288,60,20.8
+1,redes_sociales_cod=7,856,277,32.4
+2,redes_sociales_cod=7 > sexo_cod=1,382,176,46.1
+3,redes_sociales_cod=7 > sexo_cod=1 > edad_cod=3,34,12,35.3
+3,redes_sociales_cod=7 > sexo_cod=1 > edad_cod=4,96,44,45.8
+3,redes_sociales_cod=7 > sexo_cod=1 > edad_cod=5,96,40,41.7
+3,redes_sociales_cod=7 > sexo_cod=1 > edad_cod=6,104,57,54.8
+3,redes_sociales_cod=7 > sexo_cod=1 > edad_cod=7,51,23,45.1
+2,redes_sociales_cod=7 > sexo_cod=2,472,101,21.4
+3,redes_sociales_cod=7 > sexo_cod=2 > edad_cod=3,31,4,12.9
+3,redes_sociales_cod=7 > sexo_cod=2 > edad_cod=4,101,18,17.8
+3,redes_sociales_cod=7 > sexo_cod=2 > edad_cod=5,119,24,20.2
+3,redes_sociales_cod=7 > sexo_cod=2 > edad_cod=6,133,39,29.3
+3,redes_sociales_cod=7 > sexo_cod=2 > edad_cod=7,87,16,18.4
+1,redes_sociales_cod=8,3682,1300,35.3
+2,redes_sociales_cod=8 > sexo_cod=1,2015,922,45.8
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=1,4,4,100.0
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=3,245,109,44.5
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=4,534,257,48.1
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=5,506,241,47.6
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=6,491,215,43.8
+3,redes_sociales_cod=8 > sexo_cod=1 > edad_cod=7,229,96,41.9
+2,redes_sociales_cod=8 > sexo_cod=2,1655,373,22.5
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=1,1,1,100.0
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=2,1,0,0.0
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=3,179,40,22.3
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=4,402,90,22.4
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=5,422,90,21.3
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=6,423,104,24.6
+3,redes_sociales_cod=8 > sexo_cod=2 > edad_cod=7,224,48,21.4

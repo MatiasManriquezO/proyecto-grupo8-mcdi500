@@ -1,0 +1,4 @@
+implementacion,tiempo_min_ms,memoria_pico_kib,veces_mas_lenta
+diccionario O(1),0.096,8.9,1.0
+binaria recursiva O(log n),2.88,40.4,30.0
+lineal O(n),479.623,36.8,4996.1
