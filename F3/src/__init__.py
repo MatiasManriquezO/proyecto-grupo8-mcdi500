@@ -1,25 +1,28 @@
 """Núcleo algorítmico de la Fase 3 — Grupo 8, MCDI500.
 
-Dos conjuntos de módulos, con propósitos distintos:
+El notebook central (F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb)
+importa estos módulos: no redefine las clases del proyecto.
 
-Formativa 3 — el núcleo algorítmico con funciones
-    contingencia : tabla de contingencia q80 x q84, cuatro implementaciones
-    busqueda     : recuperación por identificador (lineal, binaria, índice)
-    recursion    : versiones recursivas y su alternativa iterativa
-    medicion     : tiempo y memoria (timeit, tracemalloc)
-    analisis     : AnalisisContingencia, la única clase de esa entrega
-
-Sumativa 2 — el mismo pipeline de la Fase 2, reorganizado en clases
+Pipeline de la Fase 2 reorganizado en clases (POO)
     transformadores : Transformador (base) y los 8 pasos del proyecto
     estrategias     : tratamiento de faltantes (patrón Strategy)
     pipeline        : Pipeline, PipelineObservable, Bitacora y la fábrica
 
-Los tres últimos se extraen del cuaderno
-F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb, de modo que el código
-de los módulos y el del cuaderno no pueden divergir.
+Núcleo analítico
+    segmentacion    : prevalencia por segmentos anidados (recursión + memoización)
+    contingencia    : tabla de contingencia q80 x q84, cuatro implementaciones
+    analisis        : AnalisisContingencia, clase con estado de la Formativa 3
+    busqueda        : recuperación por identificador (lineal, binaria, índice)
 
-Uso:
-    from src.pipeline import construir_pipeline_proyecto
+Utilidades
+    recursion       : casos recursivos evaluados y su alternativa iterativa
+    medicion        : tiempo y memoria (timeit, tracemalloc)
+
+Las constantes del codebook no se repiten aquí: pipeline.py las importa de
+src/procesamiento.py (módulo de F1-F2, en la raíz del repositorio).
+
+Uso (con F3/src en sys.path):
+    from pipeline import construir_pipeline_proyecto
     resultado = construir_pipeline_proyecto().ajustar(df).transformar(df)
 """
 
@@ -31,5 +34,6 @@ __all__ = [
     "medicion",
     "pipeline",
     "recursion",
+    "segmentacion",
     "transformadores",
 ]
