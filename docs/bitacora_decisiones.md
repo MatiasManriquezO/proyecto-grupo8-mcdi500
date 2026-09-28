@@ -82,6 +82,13 @@ directamente la sección de metodología del informe.
 | F3.16 | Adoptar **Strategy** como patrón principal, aplicado al tratamiento de faltantes | En la Sumativa 2, rellenar con moda o mediana inventa 4.398 respuestas de salud mental y desvía su distribución en 15,3 puntos porcentuales; conservar NA no la desvía (0,0) |
 | F3.17 | Adoptar la versión vectorizada (`pd.cut`) para clasificar horas de sueño desde el tamaño real | Con 1.000 filas es más lenta que el bucle (razón 0,4), pero gana desde 5.000 filas: 3,7 veces con 20.000 y 5,1 con 50.000. Costo: unas tres veces más memoria (0,51 frente a 0,17 MB) |
 | F3.18 | Verificar el pipeline de clases contra el archivo de F2, no contra código reescrito | Formativa 3: las 8 columnas `raza_*` coinciden en 19.733 filas y las 370 sin raza siguen como NA. Sumativa 2: el pipeline de 12 clases reproduce el CSV de F2 carácter por carácter |
+| F3.19 | Mover las clases del notebook a `F3/src/` (`transformadores.py`, `estrategias.py`, `pipeline.py`) y que el notebook las **importe** | Retroalimentación de la Formativa 3 (repositorio). El informe declaraba una organización en módulos que todavía no existía; ahora la tabla de arquitectura se genera con `inspect.getfile` y muestra el archivo real de cada clase (27 componentes, 5 didácticos en el cuaderno). El pipeline importado reproduce el CSV de F2 carácter por carácter |
+| F3.20 | Mantener **dos carpetas de código con propósitos distintos**: `src/` (F1–F2) y `F3/src/` (núcleo de F3) | Retroalimentación de la Formativa 3. `src/procesamiento.py` sigue siendo la fuente única de las constantes del codebook y lo usan los notebooks de F1 y F2; `F3/src/pipeline.py` lo importa en vez de copiar sus constantes. Consolidarlas habría obligado a reescribir F1 y F2 sin beneficio |
+| F3.21 | Un solo notebook central para la Sumativa 2 | Retroalimentación de la Formativa 3. `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` es el entregable; el de la Formativa 3 pasa a `F3/notebooks/formativa3/` como registro histórico |
+| F3.22 | Integrar en el notebook central los scripts del avance formativo sin copiarlos | Contingencia q80 × q84: `bincount` 0,069 ms frente a `iterrows` 152,9 ms (≈2.200 veces). Búsqueda de 1.000 registros: diccionario 0,096 ms, binaria recursiva 2,88 ms, lineal 479,6 ms; el diccionario ocupa ≈11 veces más memoria que el arreglo ordenado (1,70 frente a 0,15 MB) |
+| F3.23 | Reemplazar Fibonacci por un cálculo propio que se beneficia de memoización: prevalencia de salud mental no buena por segmentos anidados (redes → sexo → edad), con poda en n < 30 | Retroalimentación de la Formativa 3 (eficiencia). Con 4 niveles (530 segmentos) la recursión ingenua aplica 2.187 filtros y la memoizada 529 (uno por segmento): 46,6 frente a 11,9 ms (3,9 veces); `groupby` por nivel tarda 31,7 ms. La caché retiene ≈0,47 MB. Las tres versiones entregan la misma tabla |
+| F3.24 | Adoptar la recursión memoizada (`ArbolPrevalencia(memoizar=True)`) para la descripción por segmentos | Es la más rápida desde dos niveles, respeta la poda sin calcular segmentos que luego se descartan y la profundidad de cada rama depende de los datos (criterio F3.7). Con un solo nivel no hay trabajo repetido y la memoizada es algo más lenta (razón 0,8): se reporta |
+| F3.25 | Validar también el núcleo analítico | El nivel 1 del árbol coincide con la tabla de contingencia calculada por otro camino (`bincount`); los segmentos de nivel 1 suman 11.602, los estudiantes con ambas respuestas; cinco excepciones nuevas verificadas (columna inexistente, `n_minimo` = 0, estrategia inválida, observador sin `notificar()`, versiones que no coinciden) |
 
 **Resultados persistidos** en `F3/resultados/`, cada uno releído tras guardarse
 para verificar la escritura:
@@ -99,6 +106,12 @@ para verificar la escritura:
 | `arquitectura_f3.csv` | Sumativa 2: clase base, clases hijas, estrategias y orquestadores |
 | `eficiencia_faltantes_f3.csv` | Sumativa 2: conteo de faltantes por fila con bucle, `apply` y vectorizado |
 | `eficiencia_crecimiento_f3.csv` | Sumativa 2: cómo crece el costo de las tres versiones con el tamaño |
+| `eficiencia_contingencia_f3.csv` | Sumativa 2: las cuatro implementaciones de la contingencia, re-medidas desde el notebook central |
+| `eficiencia_busqueda_f3.csv` | Sumativa 2: búsqueda lineal, binaria recursiva y diccionario, re-medidas |
+| `eficiencia_memoizacion_f3.csv` | Sumativa 2: recursión ingenua, memoizada y `groupby` según la profundidad (1 a 4 niveles) |
+| `prevalencia_segmentos_f3.csv` | Sumativa 2: los 121 segmentos redes → sexo → edad con n, positivos y porcentaje |
+
+Los archivos `tabla*.csv`, `tabla_proporciones.csv` y `arquitectura_codigo.csv` los generó el notebook de la Formativa 3 (hoy en `F3/notebooks/formativa3/`); los terminados en `_f3.csv`, el notebook central de la Sumativa 2.
 
 Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 
@@ -112,6 +125,8 @@ Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 | Faltantes conservados, sin imputar | 13.813 en las siete variables de análisis |
 | Profundidad de *divide y vencerás* | ⌈log₂ 20.103⌉ = 15 |
 | Límite de la recursión lineal | `RecursionError` sobre ~1.000 filas |
+| Prevalencia por uso de redes y sexo (Sumativa 2) | Sexo femenino: 27,3 % (no usa) → 45,8 % (más de una vez por hora). Sexo masculino: 16,3 % → 22,5 %. La brecha crece con la frecuencia de uso |
+| Segmentos del árbol redes → sexo → edad (n ≥ 30 para subdividir) | 121 (1 + 8 + 16 + 96) |
 
 ---
 
@@ -127,7 +142,9 @@ Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 | 3.6 | Crear `F2/data/processed/` | Declarada en el README como salida del pipeline y entrada de la Fase 3 |
 | 3.7 | Mantener un único `requirements.txt` en la raíz | Se regenera con `pip freeze` tras cada instalación |
 | 3.8 | Eliminar `F3/data/processed/` | Contenía salidas de una versión anterior del notebook de F3 que imputaba y escalaba las escalas ordinales, en contra de 2.4 y 2.5. Se reemplaza por `F3/data/_demo/` |
-| 3.9 | Versionar los dos notebooks de F3 por separado | `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3) y `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2): cada entrega queda trazable en su propio archivo |
+| 3.9 | Versionar los dos notebooks de F3 por separado | `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3) y `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2): cada entrega queda trazable en su propio archivo. *Actualizada por 3.10* |
+| 3.10 | Mover el notebook de la Formativa 3 a `F3/notebooks/formativa3/` | Retroalimentación de la Formativa 3: dos cuadernos parecidos en la misma carpeta no dejaban claro cuál evaluar. En `F3/notebooks/` queda solo el entregable de la Sumativa 2 |
+| 3.11 | Documentar en el README qué contiene cada carpeta `src` | `src/` = módulo de F1–F2; `F3/src/` = núcleo de F3 (decisión F3.20) |
 
 ---
 
