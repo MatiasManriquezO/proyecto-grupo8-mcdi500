@@ -37,7 +37,7 @@ colaborativo.
 
 | Código YRBS | Nombre en el proyecto | Rol | Escala |
 |---|---|---|---|
-| `q80` | `redes_sociales_cod` | Variable de exposición | Ordinal (1 = no usa … 8 = ≥6 h/día) |
+| `q80` | `redes_sociales_cod` | Variable de exposición | Ordinal (1 = no usa … 8 = más de una vez por hora) |
 | `q84` | `salud_mental_cod` | Variable de desenlace | Ordinal (1 = Never … 5 = Always) |
 | `q85` | `sueno_cod` | Control | Ordinal (1 = ≤4 h … 7 = ≥10 h) |
 | `q76` | `actividad_fisica_cod` | Control | Ordinal (1 = 0 días … 8 = 7 días) |
@@ -67,7 +67,7 @@ solo lo transversal al proyecto completo.
 
 ```
 proyecto-grupo8-mcdi500/
-├─ src/
+├─ src/                            código de F1–F2 (ver «Dos carpetas src»)
 │  └─ procesamiento.py              funciones compartidas por todas las fases:
 │                                   carga, selección, diagnóstico,
 │                                   clasificación, transformación, validación
@@ -94,37 +94,29 @@ proyecto-grupo8-mcdi500/
 │                                       transformación
 ├─ F3/
 │  ├─ notebooks/
-│  │  ├─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
-│  │  │                             Formativa 3 — POO, eficiencia, recursión y
-│  │  │                             patrones; pipeline armado desde la configuración
-│  │  └─ S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb
-│  │                                Sumativa 2 — pipeline real de F2 en 12 clases;
-│  │                                reproduce el CSV de F2 carácter por carácter
-│  ├─ src/                          núcleo algorítmico (scripts y mediciones)
+│  │  ├─ S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb
+│  │  │                             ★ NOTEBOOK CENTRAL DE LA FASE 3 (Sumativa 2):
+│  │  │                             pipeline de F2 en clases, núcleo analítico,
+│  │  │                             mediciones y verificación contra F2
+│  │  └─ formativa3/
+│  │     └─ S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb
+│  │                                registro histórico de la Formativa 3 (no se evalúa)
+│  ├─ src/                          núcleo algorítmico de F3 (lo importa el notebook)
 │  │  ├─ __init__.py
+│  │  ├─ transformadores.py         Transformador (base) y los 8 pasos del pipeline de F2
+│  │  ├─ estrategias.py             tratamiento de faltantes (patrón Strategy)
+│  │  ├─ pipeline.py                Pipeline, PipelineObservable, Bitacora y la fábrica
+│  │  ├─ segmentacion.py            prevalencia por segmentos (recursión + memoización)
 │  │  ├─ contingencia.py            tabla q80 × q84, cuatro implementaciones
+│  │  ├─ analisis.py                AnalisisContingencia (clase con estado)
 │  │  ├─ busqueda.py                búsqueda por identificador (3 versiones)
 │  │  ├─ recursion.py               casos recursivos y alternativa iterativa
-│  │  ├─ medicion.py                medición de tiempo y memoria
-│  │  └─ analisis.py                AnalisisContingencia (clase con estado)
+│  │  └─ medicion.py                medir(), comparar(): tiempo y memoria
 │  ├─ data/_demo/                   salidas de demostración de la Formativa 3
-│  │  ├─ demo_entrenamiento.csv     entrenamiento procesado (12.564 × 33)
-│  │  ├─ demo_prueba.csv            prueba procesada (3.141 × 33)
-│  │  ├─ demo_diccionario.csv       columna, tipo, origen y nulos
-│  │  ├─ demo_parametros.csv        lo que aprendió cada paso
-│  │  └─ demo_entrenamiento_config*.csv   pipeline armado desde la configuración
-│  └─ resultados/
-│     ├─ tabla4_implementaciones.csv   núcleo (F3/src): cuatro conteos q80 × q84
-│     ├─ tabla5_busqueda.csv           núcleo: búsqueda lineal, binaria e índice
-│     ├─ tabla6_recursion.csv          núcleo: casos de recursión evaluados
-│     ├─ tabla7_modulos.csv            núcleo: los cinco módulos de F3/src
-│     ├─ tabla_proporciones.csv        núcleo: salud mental por nivel de uso
-│     ├─ arquitectura_codigo.csv       núcleo: componentes por capa
-│     ├─ parametros_pipeline_f3.csv    Sumativa 2: lo que aprendió cada clase
-│     ├─ bitacora_ejecucion_f3.csv     Sumativa 2: bitácora generada por Observer
-│     ├─ arquitectura_f3.csv           Sumativa 2: clases del pipeline
-│     ├─ eficiencia_faltantes_f3.csv   Sumativa 2: bucle, apply y vectorizada
-│     └─ eficiencia_crecimiento_f3.csv Sumativa 2: crecimiento con el tamaño
+│  └─ resultados/                   tablas de las mediciones y del pipeline
+│     ├─ *_f3.csv                   notebook central (Sumativa 2)
+│     └─ tabla*.csv, tabla_proporciones.csv, arquitectura_codigo.csv
+│                                   notebook de la Formativa 3
 ├─ F4/
 │  └─ notebooks/
 │     └─ Fase 4.md                  (pendiente: notebook de Fase 4)
@@ -133,7 +125,8 @@ proyecto-grupo8-mcdi500/
 │  ├─ diccionario_variables.md      diccionario de variables del dataset
 │  ├─ Informe/                      informes entregados (PDF)
 │  │  ├─ f1_s01_evaluacion_entregable_grupo8.pdf
-│  │  └─ f3_s02_formativa3_grupo8.pdf
+│  │  ├─ f3_s02_grupo8.pdf         Formativa 3
+│  │  └─ f3_s02_entregable_grupo8.pdf   Sumativa 2
 │  └─ Mapa Conceptual Proyecto/
 ├─ .gitignore
 ├─ .mailmap                         unifica las identidades Git del equipo
@@ -179,55 +172,76 @@ Ejecutar los notebooks en orden, desde la raíz del proyecto, seleccionando el
 kernel `Python (grupo8-mcdi500)`:
 1. `F1/notebooks/S1_F1_Definicion.ipynb`
 2. `F2/notebooks/S1_F2_Preprocesamiento.ipynb`
-3. `F3/notebooks/S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3)
-4. `F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2)
+3. `F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` — **notebook central de la Fase 3**
 
-### Fase 3 · Formativa 3: `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb`
+El cuaderno de la Formativa 3 (`F3/notebooks/formativa3/`) queda como registro histórico:
+no es necesario ejecutarlo para reproducir la Fase 3.
 
-Se ejecuta con *Restart Kernel and Run All Cells* (110 celdas, 45 de código).
-Igual que F1 y F2, localiza la raíz del repositorio con `encontrar_raiz()`, así
-que funciona desde cualquier carpeta del repositorio.
+### Fase 3 · Notebook central: `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb`
 
-| Qué hace | Evidencia en el notebook |
-|---|---|
-| Lee `F2/data/processed/yrbs2023_seleccion_procesada.csv` y verifica su esquema | 20.103 × 26, 8 columnas declaradas |
-| Reorganiza el código en clases: encapsulamiento, herencia y polimorfismo | `Transformador` y sus clases hijas; `Pipeline` |
-| Mide tiempo y memoria (`timeit`, `tracemalloc`) y el crecimiento con el tamaño | bucle frente a `pd.cut`; Fibonacci ingenuo frente a memoizado |
-| Aplica patrones de diseño: Strategy (principal), Factory, Observer y Singleton | `ImputadorFlexible`, `construir_pipeline`, `Bitacora` |
-| Arma el pipeline desde la configuración respetando F2 | `IMPUTAR_ORDINALES = False`, `ESCALAR_ORDINALES = False` |
-| Verifica el resultado con seis controles | VERIFICACIÓN APROBADA: 15.705 filas, 5.687 NA conservados |
-
-Los ejemplos de imputación y escalamiento de las partes 1 a 11 son didácticos y
-se aplican sobre una sola columna. Deja sus salidas en `F3/data/_demo/`.
-
-### Fase 3 · Sumativa 2: `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb`
-
-Se abre **desde `F3/notebooks/`** y se ejecuta con *Restart Kernel and Run All
-Cells*. Las rutas del cuaderno son relativas a esa carpeta, así que no funciona
-si se abre desde otro directorio.
+**Es el entregable de la Sumativa 2 y el único notebook de F3 que se evalúa.** Se ejecuta con
+*Restart Kernel and Run All Cells* (114 celdas, 53 de código, numeración continua, ≈1 minuto).
+Localiza la raíz del repositorio con `encontrar_raiz()`, así que funciona desde cualquier
+carpeta. **No define las clases del proyecto: las importa de `F3/src/`**, de modo que el
+código que se prueba en el cuaderno es exactamente el del repositorio.
 
 Lee dos archivos que ya están en el repositorio y **no genera datos nuevos**:
 
 | Entrada | Para qué |
 |---|---|
 | `F1/data/raw/XXH2023_YRBSS_data.csv` | archivo original del CDC: el pipeline de clases parte de aquí |
-| `F2/data/processed/yrbs2023_seleccion_procesada.csv` | salida de la Fase 2: sirve de referencia para verificar |
+| `F2/data/processed/yrbs2023_seleccion_procesada.csv` | salida de la Fase 2: entrada del núcleo analítico y referencia para verificar |
 
-La comprobación central del cuaderno es que el pipeline reorganizado en clases
-reproduce el CSV de la Fase 2 **carácter por carácter**
-(`pd.testing.assert_frame_equal` más comparación del texto completo). Si esa
-celda falla, la reorganización alteró un resultado y hay que revisarla antes de
-seguir.
+| Sección | Qué hace | Código que usa |
+|---|---|---|
+| 0–10 | Configuración y conceptos (encapsulamiento, herencia, polimorfismo, cohesión, recursión, medición, patrones), con clases didácticas | `transformadores.py`, `pipeline.py`, `recursion.py`, `medicion.py` |
+| 11 | El pipeline de F2 en 12 pasos (8 clases) armado por la fábrica | `transformadores.py`, `estrategias.py`, `pipeline.py` |
+| 12 | Conteo de faltantes: bucle, `apply` y vectorizado | `transformadores.py` |
+| 13 | Integración de la Formativa 3: contingencia q80 × q84 y búsqueda por id | `contingencia.py`, `analisis.py`, `busqueda.py` |
+| 14 | Prevalencia por segmentos redes → sexo → edad: recursión ingenua, memoizada y `groupby` | `segmentacion.py` |
+| 15 | Validación: caso normal, límites y excepciones del pipeline y del núcleo | — |
+| 16 | Strategy y verificación: el pipeline reproduce el CSV de F2 carácter por carácter | `estrategias.py` |
+| 17 | Arquitectura generada desde el código y registro en `F3/resultados/*_f3.csv` | todos |
 
-Deja en `F3/resultados/` las tablas de la ejecución (`*_f3.csv`). El conjunto
-procesado oficial sigue siendo el de la Fase 2: **la Fase 3 no genera datos nuevos**.
+La comprobación central es la de la sección 16 (`pd.testing.assert_frame_equal` más
+comparación del texto completo). Si esa celda falla, la reorganización alteró un resultado.
+
+**Entorno de la ejecución versionada:** Python 3.13.13, pandas 3.0.6, NumPy 2.5.3
+(`requirements.txt`). Los tiempos absolutos cambian con el equipo; lo reproducible son las
+razones entre implementaciones y la forma de las curvas.
+
+### Registro histórico: notebook de la Formativa 3
+
+`F3/notebooks/formativa3/S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` es el cuaderno evaluado
+en la Formativa 3 (110 celdas, 45 de código). Se conserva para trazabilidad y generó
+`F3/data/_demo/` y los `tabla*.csv` de `F3/resultados/`. Su contenido quedó integrado en el
+notebook central; su ejemplo de Fibonacci fue reemplazado por el cálculo propio de la
+sección 14 (bitácora F3.23).
+
+### Dos carpetas `src`: cuál usar
+
+| Carpeta | Contiene | La usan | Estado |
+|---|---|---|---|
+| `src/` | `procesamiento.py`: constantes del codebook (columnas, escalas), carga del archivo original y funciones del pipeline de F2 | notebooks de F1 y F2; `F3/src/pipeline.py` la importa | **vigente** para F1–F2 y como fuente única de constantes |
+| `F3/src/` | Núcleo algorítmico de F3: clases del pipeline, núcleo analítico, mediciones | notebook central de F3 | **vigente** para F3 y F4 |
+
+No se consolidaron en una sola carpeta porque tienen propósitos distintos y consolidarlas
+obligaría a modificar los notebooks de F1 y F2 ya evaluados (bitácora F3.20). La regla es
+simple: **las constantes del proyecto se definen una sola vez, en `src/procesamiento.py`**, y
+`F3/src/` las importa.
 
 ### Núcleo algorítmico `F3/src/`
 
-Los cinco módulos de `F3/src/` contienen los scripts del núcleo algorítmico y sus
-mediciones de complejidad (tabla de contingencia q80 × q84, búsqueda por
-identificador, recursión y medición). Sus resultados están en
-`F3/resultados/tabla*.csv`, `tabla_proporciones.csv` y `arquitectura_codigo.csv`.
+| Módulo | Contenido | Criterio de optimización aplicado |
+|---|---|---|
+| `transformadores.py` | `Transformador` y los 8 pasos del pipeline | `MarcadorFaltantes` vectorizado: 15,6 veces más rápido que el bucle y 248 veces más que `apply` |
+| `estrategias.py` | `ConservarFaltantes` (proyecto), `RellenarModa`, `RellenarMediana` | Cambiar la decisión = cambiar un argumento |
+| `pipeline.py` | `Pipeline`, `PipelineObservable`, `Bitacora`, `ReporteConsola`, `construir_pipeline_proyecto` | Observer registra tiempo y parámetros de cada paso |
+| `segmentacion.py` | `ArbolPrevalencia` (recursión con poda y `lru_cache`), `tabla_por_niveles_groupby` | Memoización: 3,9 veces más rápida que la recursión ingenua con 4 niveles |
+| `contingencia.py`, `analisis.py` | Tabla q80 × q84 y `AnalisisContingencia` | `bincount`: ≈2.200 veces más rápido que `iterrows` |
+| `busqueda.py` | Búsqueda lineal, binaria recursiva y diccionario | Diccionario: O(1) por consulta a cambio de ≈11 veces más memoria |
+| `recursion.py` | `aplanar()` y los casos descartados | Recursión solo con profundidad desconocida |
+| `medicion.py` | `medir()`, `comparar()`, `medir_tiempo()`, `medir_memoria()` | Exige resultados idénticos antes de medir |
 
 ### Sobre los valores faltantes
 
@@ -258,10 +272,15 @@ es justamente lo que la nota metodológica de este README descarta.
 
 ```python
 import sys; sys.path.insert(0, "F3/src")
-from contingencia import preparar_pares, contar_bincount
+import pandas as pd
+from pipeline import construir_pipeline_proyecto
+from segmentacion import ArbolPrevalencia
 
-pares = preparar_pares(df, "redes_sociales_cod", "salud_mental_cod")
-tabla = contar_bincount(pares, "redes_sociales_cod", "salud_mental_cod")
+original = pd.read_csv("F1/data/raw/XXH2023_YRBSS_data.csv", dtype={"q6orig": "string"})
+proyecto = construir_pipeline_proyecto().ajustar(original).transformar(original)
+
+arbol = ArbolPrevalencia(proyecto, ["redes_sociales_cod", "sexo_cod"], "salud_mental_mala")
+print(arbol.tabla())
 ```
 
 ## Contribuciones por integrante
@@ -280,10 +299,10 @@ persona **como dos autores distintos** y sus commits aparecen divididos.
 
 | Integrante | Foco de trabajo en la Fase 3 |
 |---|---|
-| Abigail Robles Chávez | bitácora de decisiones y documentación de la fase |
-| Daniel Ramírez Pérez | notebook de la Fase 3, preprocesamiento |
-| Matías Manríquez Ortiz | notebook de la Fase 3, archivos de ejecución |
-| Roberto Sánchez Saldivia | núcleo algorítmico (`F3/src/`), documentación del repositorio |
+| Abigail Robles Chávez | bitácora de decisiones (F3.19–F3.25) y documentación de la fase (README) |
+| Daniel Pérez Ramirez | notebook central de la Fase 3, núcleo analítico (`segmentacion.py`) y mediciones |
+| Matías Manríquez Ortiz | organización de `F3/notebooks/`, paquete `F3/src/__init__.py` e informes |
+| Roberto Sánchez Saldivia | núcleo POO (`transformadores.py`, `estrategias.py`, `pipeline.py`) |
 
 El trabajo se reparte por componente, no por archivo: cada integrante toma una
 parte del sistema y la documenta en la bitácora.
@@ -348,6 +367,10 @@ están en `docs/bitacora_decisiones.md`. Las más relevantes:
 | F3.13 | Armar el pipeline desde la configuración sin imputar ni escalar | 5.687 NA conservados y códigos del codebook intactos; seis controles OK |
 | F3.16 | Strategy como patrón principal, aplicado a los faltantes | Rellenar con moda o mediana inventa 4.398 respuestas y desvía la distribución en 15,3 pp |
 | F3.18 | El pipeline de clases debe reproducir el resultado de F2 | Archivo idéntico carácter por carácter (Sumativa 2) |
+| F3.19 | Las clases del pipeline viven en `F3/src/` y el notebook las importa | La tabla de arquitectura se genera con el archivo real de cada clase |
+| F3.20 | `src/` (F1–F2) y `F3/src/` (F3) conviven con propósitos distintos | Las constantes se definen una sola vez, en `src/procesamiento.py` |
+| F3.21 | Un solo notebook central para la Fase 3 | El de la Formativa 3 pasa a `F3/notebooks/formativa3/` |
+| F3.23 | Memoización en un cálculo propio: prevalencia por segmentos | 4 niveles: 2.187 filtros → 529; 3,9 veces más rápida que la recursión ingenua |
 
 **Limitación declarada:** al no aplicar ponderación muestral, todo resultado 
 descriptivo de este proyecto describe la muestra de 20.103 estudiantes
