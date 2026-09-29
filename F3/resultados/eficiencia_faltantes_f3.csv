@@ -1,4 +1,4 @@
 version,ms,memoria_pico_mb,veces_mas_lenta
-con_bucle,29.84,1.252,15.6
-con_apply,474.16,3.437,248.3
-vectorizada,1.91,1.212,1.0
+con_bucle,30.92,1.252,16.5
+con_apply,487.18,3.437,260.5
+vectorizada,1.87,1.212,1.0

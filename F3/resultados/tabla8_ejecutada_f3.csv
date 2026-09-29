@@ -1,0 +1,16 @@
+capa,componente,archivo_proyectado,archivo_real,cumple
+Entrada,leer_archivo,F3/src/carga.py,F3/src/carga.py,True
+Entrada,verificar_esquema,F3/src/carga.py,F3/src/carga.py,True
+Entrada,cargar,F3/src/carga.py,F3/src/carga.py,True
+Núcleo,Transformador,F3/src/transformadores.py,F3/src/transformadores.py,True
+Núcleo,ImputadorMediana,F3/src/transformadores.py,F3/src/transformadores.py,True
+Núcleo,CodificadorNominal,F3/src/transformadores.py,F3/src/transformadores.py,True
+Núcleo,EscaladorEstandar,F3/src/transformadores.py,F3/src/transformadores.py,True
+Núcleo,EliminadorColumnas,F3/src/transformadores.py,F3/src/transformadores.py,True
+Núcleo,ImputadorFlexible,F3/src/transformadores.py,F3/src/transformadores.py,True
+Orquestación,Pipeline,F3/src/pipeline.py,F3/src/pipeline.py,True
+Orquestación,PipelineObservable,F3/src/pipeline.py,F3/src/pipeline.py,True
+Orquestación,construir_pipeline_proyecto,F3/src/fabrica.py,F3/src/fabrica.py,True
+Soporte,Bitacora,F3/src/observadores.py,F3/src/observadores.py,True
+Soporte,ReporteConsola,F3/src/observadores.py,F3/src/observadores.py,True
+Soporte,medir,F3/src/medicion.py,F3/src/medicion.py,True
