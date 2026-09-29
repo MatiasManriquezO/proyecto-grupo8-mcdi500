@@ -16,6 +16,15 @@ Principios que se aplican:
                     tipo; las hijas que trabajan con varias columnas
                     redefinen columnas_requeridas().
 
+El módulo tiene dos grupos de clases hijas:
+  CLASES_PROYECTO   los 8 pasos reales del pipeline de la Fase 2.
+  CLASES_DIDACTICAS 5 pasos genéricos (imputar, codificar, escalar, eliminar)
+                    que el cuaderno usa en las secciones 4 a 10 para explicar
+                    herencia, polimorfismo y patrones. En el proyecto no se
+                    imputa ni se escala (bitácora 2.4 y 2.5). Antes se
+                    definían en el cuaderno; se trasladaron aquí según la
+                    Tabla 8 de la Formativa 3.
+
 Grupo 8 · MCDI500 · Universidad Andrés Bello
 """
 
@@ -25,9 +34,9 @@ import numpy as np
 import pandas as pd
 
 try:                                    # importado como paquete (F3.src)
-    from .estrategias import ConservarFaltantes, EstrategiaFaltantes
+    from .estrategias import ConservarFaltantes, EstrategiaFaltantes, PorMediana
 except ImportError:                     # importado con F3/src en sys.path
-    from estrategias import ConservarFaltantes, EstrategiaFaltantes
+    from estrategias import ConservarFaltantes, EstrategiaFaltantes, PorMediana
 
 
 # ══════════════════════════════════════════════════════════════
@@ -289,8 +298,106 @@ class IndicadorBinario(Transformador):
         return df
 
 
-# Clases que forman el pipeline real del proyecto (las demás subclases de
-# Transformador que se definan en el notebook son didácticas)
+# ══════════════════════════════════════════════════════════════
+# PASOS GENÉRICOS (didácticos, secciones 4 a 10 del cuaderno)
+# ══════════════════════════════════════════════════════════════
+
+class ImputadorMediana(Transformador):
+    """Rellena los nulos con la mediana aprendida.
+
+    El paréntesis (Transformador) es la HERENCIA: esta clase recibe todo lo
+    que tiene Transformador sin volver a escribirlo. Solo implementa los dos
+    métodos que le faltaban.
+    """
+
+    def aprender(self, df):
+        return {"mediana": float(df[self.columna].median()),
+                "nulos_en_ajuste": int(df[self.columna].isna().sum())}
+
+    def aplicar(self, df):
+        df[self.columna] = df[self.columna].fillna(self._parametros["mediana"])
+        return df
+
+
+class CodificadorNominal(Transformador):
+    """Convierte una columna de categorías en columnas 0/1.
+
+    El vocabulario se aprende en el ajuste: una categoría que solo aparece en
+    prueba no genera columna nueva, porque el modelo no pudo aprender de ella.
+    """
+
+    def aprender(self, df):
+        # Lista de categorías ORDENADA, para que el resultado sea el mismo en
+        # cada ejecución. Sin sorted(), el orden podría variar.
+        return {"categorias": sorted(df[self.columna].dropna().unique())}
+
+    def aplicar(self, df):
+        # Se recorre el vocabulario aprendido, NO las categorías de este df:
+        # una categoría nueva en prueba no genera columna
+        for categoria in self._parametros["categorias"]:
+            # Los nombres de columna no deben llevar espacios ni guiones
+            etiqueta = str(categoria).strip().replace(" ", "_").replace("-", "_")
+            df[f"{self.columna}_{etiqueta}"] = (df[self.columna] == categoria).astype(int)
+
+        # La columna original ya no aporta: su información quedó en las nuevas
+        return df.drop(columns=[self.columna])
+
+
+class EscaladorEstandar(Transformador):
+    """Centra en cero y escala a desviación uno."""
+
+    def aprender(self, df):
+        desviacion = float(df[self.columna].std())
+        return {"media": float(df[self.columna].mean()),
+                "desviacion": desviacion if desviacion != 0 else 1.0}
+
+    def aplicar(self, df):
+        df[self.columna] = ((df[self.columna] - self._parametros["media"])
+                            / self._parametros["desviacion"])
+        return df
+
+
+class EliminadorColumnas(Transformador):
+    """Quita columnas que no aportan al análisis, como el identificador."""
+
+    def aprender(self, df):
+        return {"existe": self.columna in df.columns}
+
+    def aplicar(self, df):
+        return df.drop(columns=[self.columna]) if self.columna in df.columns else df
+
+
+class ImputadorFlexible(Transformador):
+    """No sabe imputar: sabe cuándo. El cómo lo aporta la estrategia (Strategy)."""
+
+    def __init__(self, columna: str, estrategia=None):
+        super().__init__(columna)          # llama al constructor de la clase base
+        self.estrategia = estrategia or PorMediana()
+
+    def aprender(self, df):
+        return {"valor": self.estrategia.calcular(df, self.columna),
+                "estrategia": self.estrategia.etiqueta}
+
+    def aplicar(self, df):
+        valor = self._parametros["valor"]
+        if isinstance(valor, dict):                       # mediana por grupo
+            relleno = df[self.estrategia.columna_grupo].map(valor)
+            df[self.columna] = df[self.columna].fillna(relleno)
+            df[self.columna] = df[self.columna].fillna(df[self.columna].median())
+        else:
+            df[self.columna] = df[self.columna].fillna(valor)
+        return df
+
+
+# ══════════════════════════════════════════════════════════════
+# REGISTRO DE CLASES
+# ══════════════════════════════════════════════════════════════
+
+# Pasos que forman el pipeline real del proyecto
 CLASES_PROYECTO = (EliminadorColumnaVacia, SeleccionadorColumnas, MarcadorFaltantes,
                    TratamientoFaltantes, CastearCodigos, ConversorOrdinal,
                    CodificadorOneHot, IndicadorBinario)
+
+# Pasos genéricos que el cuaderno usa para explicar los conceptos
+CLASES_DIDACTICAS = (ImputadorMediana, CodificadorNominal, EscaladorEstandar,
+                     EliminadorColumnas, ImputadorFlexible)
