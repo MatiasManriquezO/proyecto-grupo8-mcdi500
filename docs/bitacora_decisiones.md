@@ -131,6 +131,48 @@ Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 
 ---
 
+## Fase 4 — Integración, validación y comunicación
+
+| # | Decisión | Evidencia |
+|---|---|---|
+| F4.1 | **Ponderar** con `weight`, `stratum` y `psu` todas las cifras de resultados (cierra 2.6) | Sin ponderar, 30,6 % reporta salud mental no buena; la cifra poblacional es 28,5 %. En estudiantes que no usan redes la diferencia es de 4,8 pp (20,3 % → 15,5 %) |
+| F4.2 | **Restaurar** los 7 módulos borrados por el commit `f809a58` (`src/procesamiento.py`, `F3/src/{segmentacion, contingencia, analisis, busqueda, medicion, recursion}.py`) | El commit subió la carpeta `F3/src/` por la web y reemplazó su contenido: el notebook central de F3 fallaba con `ModuleNotFoundError`. Se restauraron desde `f809a58^` sin cambios; F1, F2 y F3 vuelven a ejecutarse completos |
+| F4.3 | Varianza por **linealización de Taylor** (conglomerados con reemplazo) e IC en **escala logit** con *t* de 73 gl | Es el método de los informes del CDC. Las 6 cifras y los 6 IC oficiales (Verlenden et al., 2024; Young et al., 2024) se reproducen al decimal |
+| F4.4 | Conglomerado = par (`estrato`, `psu`) | Los códigos de PSU se repiten entre estratos: 82 códigos, 89 conglomerados reales en 16 estratos |
+| F4.5 | Regresión logística implementada con IRLS + sándwich por diseño, sin `statsmodels` | Coeficientes contrastados con `statsmodels.GLM` (mismos pesos): diferencia máxima 3·10⁻¹⁵. Se evita una dependencia pesada que no calcula varianza por diseño |
+| F4.6 | Subpoblaciones con **z = 0 fuera del dominio**, sin eliminar filas | Eliminar filas quitaría conglomerados y subestimaría la varianza; los IC por sexo coinciden con el CDC |
+| F4.7 | Adoptar `np.bincount` para la varianza por diseño | `timeit` con 20.103 filas: ≈ 13 veces más rápida que `groupby` y ≈ 39 veces más que el bucle; acepta matrices n × k (sándwich) |
+| F4.8 | Medir con **`timeit`** (`autorange` + `repeat`, mínimo de 5) y estimar el **orden empírico** (pendiente log-log) | Búsqueda lineal: pendiente ≈ 1; binaria ≈ 0,1; diccionario ≈ 0. Las vectorizadas muestran costo fijo a n pequeño |
+| F4.9 | Extender el árbol de F3 por **herencia** (`ArbolPrevalenciaPonderada`) en vez de modificar `segmentacion.py` | Solo se redefine `estadisticas()`; las columnas muestrales son idénticas a F3 y el nivel 2 coincide con `PrevalenciaPonderada` |
+| F4.10 | Jerarquía `EstimadorEncuesta` (abstracta) → `PrevalenciaPonderada`, `RegresionLogisticaPonderada` | Comparten diseño, verificación y `resumen()`; cada una implementa `estimar()` (polimorfismo) |
+| F4.11 | Edad como término lineal en el modelo; uso de redes con un indicador por nivel | La edad tiene 7 niveles con muy pocos casos en ≤ 13 años; `q80` es ordinal y no se asume equidistancia (2.4) |
+| F4.12 | Contrastar H2 con un término de interacción uso frecuente × sexo femenino | OR de interacción 1,49 (IC 1,11–2,00; p = 0,008) |
+| F4.13 | Agregar `tests/` con 36 pruebas `pytest` (F4 y regresión de F1–F3) | Un borrado como el de F4.2 falla en segundos; el notebook F4 corre la batería |
+| F4.14 | Verificar la reproducibilidad ejecutando F1–F3 en una **copia temporal** del repositorio | `nbclient` los ejecuta sin sobrescribir los CSV versionados; 3 de 3 sin errores |
+| F4.15 | Separar cálculo y dibujo: las figuras reciben tablas ya calculadas (`visualizacion.py`) | Las cifras se prueban sin abrir gráficos; las 5 figuras usan colores validados para daltonismo |
+| F4.16 | Agregar `scipy`, `matplotlib`, `seaborn` y `pytest` a `requirements.txt` | `scipy` solo para el cuantil *t*; el resto, figuras y pruebas |
+| F4.17 | Graficar desde una **copia interpretable** (`tabla_visual`), no desde la matriz del modelo | La matriz `X` tiene 19 columnas de indicadores 0/1; la copia tiene 8 filas con etiqueta del codebook, orden ordinal declarado y n por grupo (apunte Fase 4, §5). No hay escalamiento que revertir (2.4) |
+| F4.18 | Reportar el **punto de cruce** de las versiones con costo fijo | `groupby` supera al bucle solo desde ≈ 5.300 filas; `crosstab` es más lento que `zip` bajo ≈ 32.600 filas, el rango del proyecto (11.602 pares) |
+| F4.19 | Una figura por objetivo específico, en tres actos (contexto, contraste, resolución) | Título con el hallazgo, n bajo cada categoría (niveles 2–3 con 307 y 175 casos), color con función (rojo = hallazgo) y cuatro frases por figura |
+| F4.20 | Verificación final calculada desde archivos (sección 14) | Cada OE1–OE5 se enlaza a su archivo de evidencia y se comprueba que existe; huella SHA-256 del CSV del CDC, del CSV de F2 y de `requirements.txt` con fin de línea normalizado a `\n` (Git en Windows guarda `\r\n`); lista de 11 comprobaciones de la guía, 11 de 11 |
+| F4.21 | Declarar el significado de cada código en un solo lugar (`CATEGORIAS` en `src/procesamiento.py`) y mostrarlo en la sección 3 del notebook | 7 variables y 45 códigos con etiqueta, validados contra los dominios; se corrige el comentario que describía `q80` en horas diarias, cuando es una escala de frecuencia (F1 y F2 ya lo aclaraban) |
+
+**Cifras verificadas de esta fase** (ponderadas, IC 95 %):
+
+| Medida | Valor |
+|---|---|
+| Salud mental no buena, total | 28,5 % (26,7–30,4) · femenino 38,8 % · masculino 18,8 % |
+| No usa redes → más de una vez por hora | 15,5 % (11,8–20,1) → 33,1 % (30,7–35,6) |
+| Femenino: no usa → más de una vez por hora | 20,9 % → 44,1 % (+23,2 pp) |
+| Masculino: no usa → más de una vez por hora | 12,6 % → 20,1 % (+7,5 pp) |
+| Duerme 8 h o más | 23,2 % (21,4–25,1); no usa 30,6 % (22,6–39,9), más de una vez por hora 21,4 % |
+| OR ajustado, más de una vez por hora vs. no usa | 2,45 (1,55–3,85), n = 10.941 casos completos |
+| OR ajustado, duerme 8 h o más | 0,48 (0,40–0,58) |
+
+Las decisiones de arquitectura con contexto y alternativas descartadas están en `docs/adr/`.
+
+---
+
 ## Infraestructura del repositorio
 
 | # | Decisión | Evidencia |
@@ -146,6 +188,9 @@ Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 | 3.9 | Versionar los dos notebooks de F3 por separado | `S2_F3_NucleoAlgoritmico_Eficiencia_POO.ipynb` (Formativa 3) y `S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` (Sumativa 2): cada entrega queda trazable en su propio archivo. *Actualizada por 3.10* |
 | 3.10 | Mover el notebook de la Formativa 3 a `F3/notebooks/formativa3/` | Retroalimentación de la Formativa 3: dos cuadernos parecidos en la misma carpeta no dejaban claro cuál evaluar. En `F3/notebooks/` queda solo el entregable de la Sumativa 2 |
 | 3.11 | Documentar en el README qué contiene cada carpeta `src` | `src/` = módulo de F1–F2; `F3/src/` = núcleo de F3 (decisión F3.20) |
+| 3.12 | Restaurar los módulos borrados por `f809a58` y prohibir subir carpetas por la web que reemplacen su contenido | Ver F4.2. Regla: se suben archivos, no carpetas; antes de subir se ejecuta `python -m pytest tests -q` |
+| 3.13 | Crear `changelog.md` en la raíz | Registro por fecha, descripción, commit y justificación técnica, exigido por la Sumativa 3 |
+| 3.14 | Crear `tests/`, `docs/adr/` y `docs/arquitectura.md` | Pruebas automatizadas, registro de decisiones de arquitectura (ADR) y diagramas de flujo, componentes, secuencia y datos |
 
 ---
 
