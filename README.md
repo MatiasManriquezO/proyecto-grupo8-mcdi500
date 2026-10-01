@@ -1,9 +1,20 @@
 # Proyecto Grupo 8 — MCDI500
 
-Análisis de la asociación entre el uso de dispositivos electrónicos para
-entretenimiento y la salud mental percibida en estudiantes de enseñanza media
-de Estados Unidos, mediante un flujo de trabajo reproducible, documentado y
-colaborativo.
+Análisis de la asociación entre la frecuencia de uso de redes sociales y la
+salud mental autopercibida y el sueño en estudiantes de enseñanza media de
+Estados Unidos (YRBS 2023), con estimaciones ponderadas por el diseño muestral,
+mediante un flujo de trabajo reproducible, documentado y colaborativo.
+
+> **Estado: proyecto completo (F1–F4).** Punto de entrada:
+> `F4/notebooks/S3_F4_Integracion_Resultados_Grupo8.ipynb`. Informe final:
+> `docs/Informe/f4_s04_evaluacion_entregable_grupo8.pdf`.
+
+**Resultados principales (ponderados, IC 95 %).** El 28,5 % (26,7–30,4) de los
+estudiantes reporta salud mental no buena la mayor parte del tiempo o siempre;
+la cifra pasa de 15,5 % entre quienes no usan redes a 33,1 % entre quienes las
+usan más de una vez por hora (OR ajustado 2,45; 1,55–3,85), y la asociación es
+mayor en el sexo femenino (20,9 % → 44,1 %). Las estimaciones reproducen al
+decimal las cifras oficiales del CDC.
 
 ## Pregunta de investigación
 
@@ -126,18 +137,37 @@ proyecto-grupo8-mcdi500/
 │     └─ tabla*.csv, tabla_proporciones.csv, arquitectura_codigo.csv
 │                                   notebook de la Formativa 3
 ├─ F4/
-│  └─ notebooks/
-│     └─ Fase 4.md                  (pendiente: notebook de Fase 4)
+│  ├─ notebooks/
+│  │  └─ S3_F4_Integracion_Resultados_Grupo8.ipynb
+│  │                                ★ NOTEBOOK CENTRAL DE LA FASE 4 (Sumativa 3):
+│  │                                integración F1–F4, resultados ponderados,
+│  │                                modelo, timeit, pruebas y reproducibilidad
+│  ├─ src/                          código de F4 (lo importa el notebook)
+│  │  ├─ __init__.py
+│  │  ├─ encuesta.py                DisenoMuestral, EstimadorEncuesta (base),
+│  │  │                             PrevalenciaPonderada, RegresionLogisticaPonderada,
+│  │  │                             ArbolPrevalenciaPonderada (hereda de F3)
+│  │  ├─ rendimiento.py             medir_timeit, curva_crecimiento, orden_empirico
+│  │  ├─ visualizacion.py           figuras de resultados (Matplotlib + Seaborn)
+│  │  ├─ verificacion.py            entorno, requirements, ejecución de F1–F3, pytest
+│  │  └─ changelog.py               genera changelog.md desde git log
+│  ├─ resultados/                   tablas *_f4.csv que cita el informe
+│  └─ figuras/                      figura1..3 (informe) y figuraA1..A2 (anexo)
+├─ tests/                           36 pruebas pytest (F4 + regresión de F1–F3)
 ├─ docs/                            documentación transversal al proyecto
-│  ├─ bitacora_decisiones.md        registro de decisiones técnicas
+│  ├─ bitacora_decisiones.md        registro de decisiones técnicas (0.1 a F4.19)
+│  ├─ arquitectura.md               diagramas de flujo, componentes, secuencia y datos
+│  ├─ adr/                          ADR-0001 a ADR-0005 (decisiones de arquitectura)
 │  ├─ diccionario_variables.md      diccionario de variables del dataset
 │  ├─ Informe/                      informes entregados (PDF)
 │  │  ├─ f1_s01_evaluacion_entregable_grupo8.pdf
 │  │  ├─ f3_s02_grupo8.pdf         Formativa 3
-│  │  └─ f3_s02_entregable_grupo8.pdf   Sumativa 2
+│  │  ├─ f3_s02_entregable_grupo8.pdf   Sumativa 2
+│  │  └─ f4_s04_evaluacion_entregable_grupo8.pdf   Sumativa 3 (informe final)
 │  └─ Mapa Conceptual Proyecto/
 ├─ .gitignore
 ├─ .mailmap                         unifica las identidades Git del equipo
+├─ changelog.md                     fecha, commit y justificación de cada cambio
 ├─ requirements.txt                 dependencias del proyecto (único, en la raíz)
 └─ README.md
 ```
@@ -166,7 +196,8 @@ notebook; no lo reemplazan y la Fase 4 no las usa.
 | `guardar_dataset(df, ruta)` | DataFrame, ruta destino | Path absoluto del archivo |
 
 ## Requisitos y ejecución
-Python 3.11 o superior.
+Python 3.13 o superior (la ejecución versionada de F4 usó Python 3.13.7, pandas 3.0.6,
+NumPy 2.5.3, SciPy 1.17.1, Matplotlib 3.11.2 y Seaborn 0.13.2).
 
 ```bash
 python -m venv .venv
@@ -181,6 +212,17 @@ kernel `Python (grupo8-mcdi500)`:
 1. `F1/notebooks/S1_F1_Definicion.ipynb`
 2. `F2/notebooks/S1_F2_Preprocesamiento.ipynb`
 3. `F3/notebooks/S2_F3_NucleoAlgoritmico_POO_Grupo8.ipynb` — **notebook central de la Fase 3**
+4. `F4/notebooks/S3_F4_Integracion_Resultados_Grupo8.ipynb` — **notebook central de la Fase 4**
+   (su sección 11 vuelve a ejecutar 1–3 en una copia temporal y confirma que corren sin errores)
+
+Pruebas automatizadas (≈ 10 s, desde la raíz):
+
+```bash
+python -m pytest tests -q
+```
+
+Antes de subir cambios al repositorio, las pruebas deben pasar. Si un módulo de `src/` o
+`F3/src/` desaparece o cambia su resultado, fallan de inmediato (bitácora F4.2 y F4.13).
 
 El cuaderno de la Formativa 3 (`F3/notebooks/formativa3/`) queda como registro histórico:
 no es necesario ejecutarlo para reproducir la Fase 3.
@@ -219,6 +261,31 @@ comparación del texto completo). Si esa celda falla, la reorganización alteró
 **Entorno de la ejecución versionada:** Python 3.13.15, pandas 3.0.6, NumPy 2.5.3
 (`requirements.txt`). Los tiempos absolutos cambian con el equipo; lo reproducible son las
 razones entre implementaciones y la forma de las curvas.
+
+### Fase 4 · Notebook central: `S3_F4_Integracion_Resultados_Grupo8.ipynb`
+
+**Es el entregable de la Sumativa 3.** 61 celdas (31 de código), ejecución continua sin errores
+(≈ 3–5 minutos). No define clases: importa `src/`, `F3/src/` y `F4/src/`.
+
+| Sección | Qué hace | Evidencia que deja |
+|---|---|---|
+| 0 | Entorno y versiones frente a `requirements.txt` | `F4/resultados/entorno_f4.csv` |
+| 2 | El pipeline de clases de F3 reproduce el CSV de F2 carácter por carácter | `assert` |
+| 3 | Validaciones del dataset analítico (forma, id único, dominios, indicadores) y codebook con la etiqueta de cada código | 10 validaciones OK, `codebook_f4.csv` |
+| 4 | Diseño muestral y **validación externa**: 6 cifras e IC del CDC reproducidos | `validacion_externa_cdc_f4.csv` |
+| 5 | Prevalencias ponderadas: H1 (uso de redes), H2 (sexo), H3 (sueño) | `prevalencia_*_f4.csv`, `sueno_redes_f4.csv` |
+| 6 | Regresión logística ponderada e interacción uso × sexo (H4, H2) | `modelo_*_f4.csv` |
+| 7 | Árbol recursivo de F3 extendido por herencia | verificación contra F3 |
+| 8 | Copia interpretable para visualizar (n por grupo, orden ordinal) y tres figuras, una por objetivo, con relato en tres actos; dos complementarias | `tabla_visual_f4.csv`, `F4/figuras/*.png` |
+| 9 | `timeit` y orden empírico (varianza, contingencia, búsqueda) y punto de cruce | `eficiencia_varianza_f4.csv`, `orden_empirico_f4.csv`, `puntos_de_cruce_f4.csv` |
+| 10 | 36 pruebas `pytest` y 10 casos límite/excepción | `pruebas_pytest_f4.txt`, `casos_limite_f4.csv` |
+| 11 | Ejecución de F1–F3 en copia limpia | `verificacion_ejecucion_f4.csv` |
+| 12 | Arquitectura generada con `inspect` | `arquitectura_f4.csv` |
+| 14 | Verificación final: cada objetivo con su evidencia, huella SHA-256 de los datos y lista de 11 comprobaciones | `huellas_f4.csv`, `lista_verificacion_f4.csv` |
+
+**Método de estimación.** Linealización de Taylor con conglomerados (par estrato-psu) con
+reemplazo, IC en escala logit con *t* de 73 grados de libertad. Es el método de los informes
+del CDC y reproduce sus cifras al decimal (ADR-0003).
 
 ### Registro histórico: notebook de la Formativa 3
 
@@ -311,12 +378,12 @@ El archivo `.mailmap` de la raíz unifica las identidades de quien commiteó con
 más de un nombre de usuario sobre el mismo correo. Sin él, Git cuenta a esa
 persona **como dos autores distintos** y sus commits aparecen divididos.
 
-| Integrante | Foco de trabajo en la Fase 3 |
-|---|---|
-| Abigail Robles Chávez | bitácora de decisiones (F3.19–F3.25) y documentación de la fase (README) |
-| Daniel Pérez Ramirez | notebook central de la Fase 3, núcleo analítico (`segmentacion.py`) y mediciones |
-| Matías Manríquez Ortiz | organización de `F3/notebooks/`, paquete `F3/src/__init__.py` e informes |
-| Roberto Sánchez Saldivia | núcleo POO (`transformadores.py`, `estrategias.py`, `pipeline.py`) |
+| Integrante | Foco en la Fase 3 | Foco en la Fase 4 |
+|---|---|---|
+| Abigail Robles Chávez | bitácora (F3.19–F3.25) y README | pruebas `pytest`, arquitectura y ADR, README final |
+| Daniel Pérez Ramirez | notebook central de F3, `segmentacion.py` y mediciones | restauración de módulos (F4.2), diseño muestral (`encuesta.py`), notebook central de F4 |
+| Matías Manríquez Ortiz | organización de `F3/notebooks/`, `__init__.py` e informes | `timeit`, figuras y verificación; resultados e informe final |
+| Roberto Sánchez Saldivia | núcleo POO (`transformadores.py`, `estrategias.py`, `pipeline.py`) | dependencias de F4, bitácora F4.1–F4.19, changelog |
 
 El trabajo se reparte por componente, no por archivo: cada integrante toma una
 parte del sistema y la documenta en la bitácora.
@@ -325,7 +392,8 @@ parte del sistema y la documenta en la bitácora.
 Cada tipo de documento va en su propia subcarpeta, para no mezclar archivos:
 - `docs/Mapa Conceptual Proyecto/`
 - `docs/Informe/`
-- `docs/Referencias/` (crear si se necesita)
+- `docs/adr/` — un archivo por decisión de arquitectura (contexto, decisión, alternativas, consecuencias)
+- `docs/arquitectura.md` — diagramas Mermaid que GitHub dibuja directamente
 
 ## Convención de commits
 
@@ -417,6 +485,14 @@ fuente listada debe estar citada en el informe o en los notebooks.
   https://docs.python.org/3/library/tracemalloc.html
 - The pandas development team. (s. f.). *pandas documentation*.
   https://pandas.pydata.org/docs/
+- pytest-dev. (s. f.). *pytest documentation*. https://docs.pytest.org/
+- The Matplotlib development team. (s. f.). *Matplotlib: Visualization with
+  Python*. https://matplotlib.org/stable/
+- Virtanen, P., Gommers, R., Oliphant, T. E., et al. (2020). SciPy 1.0:
+  Fundamental algorithms for scientific computing in Python. *Nature Methods,
+  17*, 261–272. https://doi.org/10.1038/s41592-019-0686-2
+- Waskom, M. L. (2021). seaborn: Statistical data visualization. *Journal of Open
+  Source Software, 6*(60), 3021. https://doi.org/10.21105/joss.03021
 
 **Arquitectura de software**
 
@@ -424,6 +500,20 @@ fuente listada debe estar citada en el informe o en los notebooks.
   Elements of reusable object-oriented software*. Addison-Wesley.
 
 **Académica complementaria (últimos cinco años)**
+
+- Valkenburg, P. M., Meier, A., & Beyens, I. (2022). Social media use and its
+  impact on adolescent mental health: An umbrella review of the evidence.
+  *Current Opinion in Psychology, 44*, 58–68. https://doi.org/10.1016/j.copsyc.2021.08.017
+- Verlenden, J. V., Fodeman, A., Wilkins, N., Jones, S. E., Moore, S., Cornett, K.,
+  Sims, V., Saelee, R., & Brener, N. D. (2024). Mental health and suicide risk among
+  high school students and protective factors — Youth Risk Behavior Survey, United
+  States, 2023. *MMWR Supplements, 73*(4), 79–86. https://doi.org/10.15585/mmwr.su7304a9
+- Young, E., McCain, J. L., Mercado, M. C., Ballesteros, M. F., Moore, S., Licitis, L.,
+  Stinson, J., Jones, S. E., & Wilkins, N. J. (2024). Frequent social media use and
+  experiences with bullying victimization, persistent feelings of sadness or
+  hopelessness, and suicide risk among high school students — Youth Risk Behavior
+  Survey, United States, 2023. *MMWR Supplements, 73*(4), 23–30.
+  https://doi.org/10.15585/mmwr.su7304a3
 
 - Gentzler, A. L., Hughes, J. L., Johnston, M., & Alderson, J. E. (2023). Which
   social media platforms matter and for whom? Examining moderators of links
@@ -435,3 +525,12 @@ fuente listada debe estar citada en el informe o en los notebooks.
 - Universidad Andrés Bello. (2026). *MCDI500 Programación para la Ciencia de
   Datos: Apunte Fase 3* [Material docente]. Magíster en Ciencia de Datos e
   Inteligencia Artificial.
+- Universidad Andrés Bello. (2026). *Documentación profesional de arquitectura en
+  ciencia de datos* [Infografía, Fase 4]. MCDI500 Programación para la Ciencia de Datos.
+- Universidad Andrés Bello. (2026). *Introducción a la Fase 4: integración,
+  validación y comunicación de resultados* [Material docente]. MCDI500.
+
+**Métodos para encuestas complejas**
+
+- Lumley, T. (2010). *Complex surveys: A guide to analysis using R*. Wiley.
+  https://doi.org/10.1002/9780470580066
