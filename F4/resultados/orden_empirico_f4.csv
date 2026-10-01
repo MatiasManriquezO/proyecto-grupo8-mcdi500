@@ -1,0 +1,11 @@
+implementacion,pendiente_loglog,pendiente_asintotica,problema,ms_con_160000
+numpy (bincount),0.74,0.98,varianza por diseño,0.2595
+bucle de Python,0.99,1.02,varianza por diseño,26.2574
+pandas (groupby),0.31,0.5,varianza por diseño,2.5622
+bincount,0.83,1.15,contingencia q80 × q84,0.8161
+zip,0.98,0.99,contingencia q80 × q84,25.4305
+crosstab,0.21,0.39,contingencia q80 × q84,9.5672
+iterrows,1.0,1.0,contingencia q80 × q84,2140.0207
+diccionario O(1),0.02,0.01,búsqueda de 200 id,0.0224
+binaria recursiva O(log n),0.11,0.1,búsqueda de 200 id,0.7261
+lineal O(n),0.98,0.96,búsqueda de 200 id,868.3802

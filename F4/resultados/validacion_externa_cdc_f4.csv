@@ -1,0 +1,7 @@
+indicador,grupo,cdc_pct,cdc_ic,grupo8_pct,grupo8_ic,muestral_pct,deff,fuente,coincide
+salud_mental_mala,Total,28.5,26.7–30.4,28.5,26.7–30.4,30.6,6.74,Verlenden et al. (2024),True
+salud_mental_mala,Femenino,38.8,36.2–41.4,38.8,36.2–41.4,41.3,5.41,Verlenden et al. (2024),True
+salud_mental_mala,Masculino,18.8,17.3–20.5,18.8,17.3–20.5,20.0,3.41,Verlenden et al. (2024),True
+redes_uso_frecuente,Total,77.0,73.5–80.1,77.0,73.5–80.1,78.1,23.51,Young et al. (2024),True
+redes_uso_frecuente,Femenino,81.8,77.6–85.3,81.8,77.6–85.3,83.2,18.87,Young et al. (2024),True
+redes_uso_frecuente,Masculino,72.9,69.8–75.8,72.9,69.8–75.8,73.3,8.64,Young et al. (2024),True

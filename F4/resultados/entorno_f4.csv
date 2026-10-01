@@ -1,0 +1,10 @@
+libreria,fijada,instalada,coincide
+pandas,3.0.6,3.0.6,True
+numpy,2.5.3,2.5.3,True
+scipy,1.17.1,1.17.1,True
+matplotlib,3.11.2,3.11.2,True
+seaborn,0.13.2,0.13.2,True
+jupyterlab,4.6.4,4.6.4,True
+ipykernel,7.3.0,7.3.0,True
+nbclient,0.11.0,0.11.0,True
+pytest,9.1.1,9.1.1,True

@@ -1,0 +1,21 @@
+modulo,componente,tipo,hereda_de,responsabilidad
+F4/src/encuesta.py,ArbolPrevalenciaPonderada,clase,ArbolPrevalencia,ArbolPrevalencia (F3) + estimación ponderada en cada segmento.
+F4/src/encuesta.py,DisenoMuestral,clase,,"Pesos, estratos y conglomerados (PSU) de una encuesta compleja."
+F4/src/encuesta.py,EstimadorEncuesta,clase,ABC,Base de todo estimador por diseño: recibe el diseño y expone estimar().
+F4/src/encuesta.py,PrevalenciaPonderada,clase,EstimadorEncuesta,"Proporción ponderada de un indicador 0/1, total o por grupos."
+F4/src/encuesta.py,RegresionLogisticaPonderada,clase,EstimadorEncuesta,Regresión logística ponderada con errores estándar por diseño.
+F4/src/rendimiento.py,curva_crecimiento,función,,Mide todas las implementaciones a varios tamaños.
+F4/src/rendimiento.py,medir_timeit,función,,Mide cada implementación con timeit y memoria pico con tracemalloc.
+F4/src/rendimiento.py,orden_empirico,función,,Pendiente de log(tiempo) contra log(n) por implementación.
+F4/src/rendimiento.py,punto_de_cruce,función,,Tamaño n desde el cual `rapida_en_grande` supera a `rapida_en_pequeno`.
+F4/src/visualizacion.py,estilo,función,,Tema común del curso: whitegrid de seaborn y títulos en negrita.
+F4/src/visualizacion.py,grafico_brecha_sexo,función,,"Figura 2 · la misma relación separada por sexo, con banda de IC 95 % (H2)."
+F4/src/visualizacion.py,grafico_crecimiento,función,,Figura A2 · curvas de crecimiento en escala log-log (una por implementación).
+F4/src/visualizacion.py,grafico_odds_ratios,función,,"Figura A1 · odds ratios ajustados (escala logarítmica, referencia = 1)."
+F4/src/visualizacion.py,grafico_prevalencia_redes,función,,Figura 1 · % con salud mental no buena por frecuencia de uso de redes (H1).
+F4/src/visualizacion.py,grafico_sueno_redes,función,,Figura 3 · % que duerme 8 horas o más por frecuencia de uso de redes (H3).
+F4/src/verificacion.py,comparar_con_requirements,función,,Tabla librería | fijada | instalada | coincide.
+F4/src/verificacion.py,ejecutar_notebooks,función,,Ejecuta cada notebook de principio a fin en una copia del repositorio.
+F4/src/verificacion.py,ejecutar_pruebas,función,,Corre pytest en la raíz y devuelve el resumen y el código de salida.
+F4/src/verificacion.py,entorno_actual,función,,"Python, sistema y versión instalada de cada librería (None si falta)."
+F4/src/verificacion.py,leer_requirements,función,,{librería: versión} de las líneas 'nombre==versión' de requirements.txt.

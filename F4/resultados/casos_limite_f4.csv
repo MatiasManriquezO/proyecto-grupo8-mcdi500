@@ -1,0 +1,11 @@
+caso,esperado,obtenido,ok
+Diseño sin la columna psu,KeyError,KeyError,True
+Un peso igual a cero,ValueError,ValueError,True
+Desenlace no binario (q84 1-5),ValueError,ValueError,True
+DataFrame distinto al del diseño,ValueError,ValueError,True
+Grupo inexistente,KeyError,KeyError,True
+Modelo sin matriz X,ValueError,ValueError,True
+"Nivel de confianza 1,5",ValueError,ValueError,True
+timeit con resultados distintos,ValueError,ValueError,True
+Figura con tabla incompleta,KeyError,KeyError,True
+Dominio vacío (caso límite: no falla),sin excepción,sin excepción,True

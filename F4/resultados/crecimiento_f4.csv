@@ -1,0 +1,61 @@
+n,implementacion,tiempo_min_ms,problema
+5000,numpy (bincount),0.0197,varianza por diseño
+5000,bucle de Python,0.8278,varianza por diseño
+5000,pandas (groupby),0.8646,varianza por diseño
+10000,numpy (bincount),0.0262,varianza por diseño
+10000,pandas (groupby),0.9739,varianza por diseño
+10000,bucle de Python,1.6616,varianza por diseño
+20000,numpy (bincount),0.0411,varianza por diseño
+20000,pandas (groupby),1.0465,varianza por diseño
+20000,bucle de Python,3.2969,varianza por diseño
+40000,numpy (bincount),0.0666,varianza por diseño
+40000,pandas (groupby),1.2876,varianza por diseño
+40000,bucle de Python,6.3939,varianza por diseño
+80000,numpy (bincount),0.1244,varianza por diseño
+80000,pandas (groupby),1.7646,varianza por diseño
+80000,bucle de Python,12.7701,varianza por diseño
+160000,numpy (bincount),0.2595,varianza por diseño
+160000,pandas (groupby),2.5622,varianza por diseño
+160000,bucle de Python,26.2574,varianza por diseño
+5000,bincount,0.048,contingencia q80 × q84
+5000,zip,0.8515,contingencia q80 × q84
+5000,crosstab,4.4864,contingencia q80 × q84
+5000,iterrows,66.2886,contingencia q80 × q84
+10000,bincount,0.0641,contingencia q80 × q84
+10000,zip,1.7293,contingencia q80 × q84
+10000,crosstab,4.5753,contingencia q80 × q84
+10000,iterrows,131.7027,contingencia q80 × q84
+20000,bincount,0.0888,contingencia q80 × q84
+20000,zip,3.3881,contingencia q80 × q84
+20000,crosstab,4.9207,contingencia q80 × q84
+20000,iterrows,267.0222,contingencia q80 × q84
+40000,bincount,0.1657,contingencia q80 × q84
+40000,crosstab,5.5571,contingencia q80 × q84
+40000,zip,6.4909,contingencia q80 × q84
+40000,iterrows,534.5633,contingencia q80 × q84
+80000,bincount,0.3903,contingencia q80 × q84
+80000,crosstab,6.8831,contingencia q80 × q84
+80000,zip,13.1679,contingencia q80 × q84
+80000,iterrows,1050.2996,contingencia q80 × q84
+160000,bincount,0.8161,contingencia q80 × q84
+160000,crosstab,9.5672,contingencia q80 × q84
+160000,zip,25.4305,contingencia q80 × q84
+160000,iterrows,2140.0207,contingencia q80 × q84
+5000,diccionario O(1),0.021,búsqueda de 200 id
+5000,binaria recursiva O(log n),0.4988,búsqueda de 200 id
+5000,lineal O(n),27.5139,búsqueda de 200 id
+10000,diccionario O(1),0.0218,búsqueda de 200 id
+10000,binaria recursiva O(log n),0.5329,búsqueda de 200 id
+10000,lineal O(n),63.6439,búsqueda de 200 id
+20000,diccionario O(1),0.0216,búsqueda de 200 id
+20000,binaria recursiva O(log n),0.5683,búsqueda de 200 id
+20000,lineal O(n),113.2505,búsqueda de 200 id
+40000,diccionario O(1),0.0221,búsqueda de 200 id
+40000,binaria recursiva O(log n),0.6316,búsqueda de 200 id
+40000,lineal O(n),227.9363,búsqueda de 200 id
+80000,diccionario O(1),0.0224,búsqueda de 200 id
+80000,binaria recursiva O(log n),0.6602,búsqueda de 200 id
+80000,lineal O(n),447.8117,búsqueda de 200 id
+160000,diccionario O(1),0.0224,búsqueda de 200 id
+160000,binaria recursiva O(log n),0.7261,búsqueda de 200 id
+160000,lineal O(n),868.3802,búsqueda de 200 id

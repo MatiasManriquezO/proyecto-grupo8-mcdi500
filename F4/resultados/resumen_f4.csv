@@ -1,0 +1,7 @@
+resultado,valor
+Validación externa CDC (6 cifras e IC),6 de 6 coinciden
+"Salud mental no buena, total (ponderada)",28.5 %
+No usa → más de una vez por hora,15.5 % → 33.1 %
+"OR ajustado, más de una vez por hora","[2.45, 1.55, 3.85]"
+Pruebas pytest,36 passed in 9.62s
+Notebooks F1-F3 ejecutados sin error,3 de 3

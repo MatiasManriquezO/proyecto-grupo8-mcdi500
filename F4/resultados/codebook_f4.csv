@@ -1,0 +1,46 @@
+variable,codigo,categoria,n,en_indicador
+edad_cod,1,12 años o menos,44,
+edad_cod,2,13 años,33,
+edad_cod,3,14 años,2569,
+edad_cod,4,15 años,5526,
+edad_cod,5,16 años,5208,
+edad_cod,6,17 años,4458,
+edad_cod,7,18 años o más,2167,
+sexo_cod,1,Femenino,9884,sexo_femenino
+sexo_cod,2,Masculino,10061,
+raceeth_cod,1,Indígena americana o nativa de Alaska,1334,
+raceeth_cod,2,Asiática,995,
+raceeth_cod,3,Negra o afroamericana,1791,
+raceeth_cod,4,Nativa de Hawái u otras islas del Pacífico,105,
+raceeth_cod,5,Blanca,9700,
+raceeth_cod,6,Hispana o latina,1208,
+raceeth_cod,7,"Múltiple, hispana",2786,
+raceeth_cod,8,"Múltiple, no hispana",1814,
+salud_mental_cod,1,Nunca,2838,
+salud_mental_cod,2,Rara vez,3308,
+salud_mental_cod,3,A veces,4751,
+salud_mental_cod,4,La mayor parte del tiempo,3377,salud_mental_mala
+salud_mental_cod,5,Siempre,1431,salud_mental_mala
+redes_sociales_cod,1,No usa,1082,
+redes_sociales_cod,2,Pocas veces al mes,406,
+redes_sociales_cod,3,Una vez a la semana,231,
+redes_sociales_cod,4,Pocas veces a la semana,708,
+redes_sociales_cod,5,Una vez al día,904,
+redes_sociales_cod,6,Varias veces al día,5888,redes_uso_frecuente
+redes_sociales_cod,7,Una vez por hora,1181,redes_uso_frecuente
+redes_sociales_cod,8,Más de una vez por hora,4803,redes_uso_frecuente
+sueno_cod,1,4 horas o menos,1666,
+sueno_cod,2,5 horas,2562,
+sueno_cod,3,6 horas,4342,
+sueno_cod,4,7 horas,4865,
+sueno_cod,5,8 horas,3009,sueno_8h_o_mas
+sueno_cod,6,9 horas,733,sueno_8h_o_mas
+sueno_cod,7,10 horas o más,264,sueno_8h_o_mas
+actividad_fisica_cod,1,0 días,2813,
+actividad_fisica_cod,2,1 día,1312,
+actividad_fisica_cod,3,2 días,1718,
+actividad_fisica_cod,4,3 días,2089,
+actividad_fisica_cod,5,4 días,1882,
+actividad_fisica_cod,6,5 días,2669,actividad_5_dias
+actividad_fisica_cod,7,6 días,1544,actividad_5_dias
+actividad_fisica_cod,8,7 días,4849,actividad_5_dias

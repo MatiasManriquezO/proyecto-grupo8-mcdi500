@@ -1,0 +1,12 @@
+comprobacion,ok
+Cada objetivo específico tiene su figura o tabla,True
+Tres figuras exportadas en F4/figuras,True
+Cifras del CDC reproducidas (6 de 6),True
+"Pruebas pytest aprobadas, ninguna fallida",True
+Casos límite y excepciones con el resultado esperado,True
+Notebooks F1–F3 ejecutados sin errores,True
+timeit medido en tres o más tamaños,True
+La medición incluye memoria (tracemalloc),True
+Dependencias con versión fija,True
+Componentes de F4 documentados desde el código,True
+Huellas de los datos registradas,True

@@ -1,0 +1,4 @@
+archivo,ruta,bytes,sha256_16
+Original del CDC (F1),F1/data/raw/XXH2023_YRBSS_data.csv,5122849,590ada8db8d75ec2
+Conjunto procesado (F2),F2/data/processed/yrbs2023_seleccion_procesada.csv,1340575,fd22a62beb53a21c
+Dependencias,requirements.txt,2134,f1cf03fba5bf9dc9

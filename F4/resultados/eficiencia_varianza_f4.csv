@@ -1,0 +1,4 @@
+implementacion,ejecuciones,repeticiones,tiempo_min_ms,tiempo_mediana_ms,memoria_pico_kib,veces_mas_lenta
+numpy (bincount),5000,5,0.0836,0.0849,5.0,1.0
+pandas (groupby),200,5,1.0899,1.1015,836.2,13.0
+bucle de Python,100,5,3.2444,3.3376,6.8,38.8
