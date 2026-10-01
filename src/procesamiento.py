@@ -45,7 +45,9 @@ ESCALAS_ORDINALES = {
     # 1 = ≤12 años, 2 = 13, 3 = 14, 4 = 15, 5 = 16, 6 = 17, 7 = ≥18 años
 
     "redes_sociales_cod":    [1, 2, 3, 4, 5, 6, 7, 8],
-    # 1 = no usa, 2 = <1 h, 3 = 1 h, 4 = 2 h, 5 = 3 h, 6 = 4 h, 7 = 5 h, 8 = ≥6 h diarias
+    # Escala de FRECUENCIA:
+    # 1 = no usa, 2 = pocas veces al mes, 3 = una vez a la semana, 4 = pocas veces a la semana,
+    # 5 = una vez al día, 6 = varias veces al día, 7 = una vez por hora, 8 = más de una vez por hora
 
     "salud_mental_cod":      [1, 2, 3, 4, 5],
     # 1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Most of the time, 5 = Always
