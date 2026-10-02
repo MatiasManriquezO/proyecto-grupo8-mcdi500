@@ -45,7 +45,7 @@ ESCALAS_ORDINALES = {
     # 1 = ≤12 años, 2 = 13, 3 = 14, 4 = 15, 5 = 16, 6 = 17, 7 = ≥18 años
 
     "redes_sociales_cod":    [1, 2, 3, 4, 5, 6, 7, 8],
-    # Escala de FRECUENCIA:
+    # Escala de FRECUENCIA, no de horas diarias (ver F1 y F2):
     # 1 = no usa, 2 = pocas veces al mes, 3 = una vez a la semana, 4 = pocas veces a la semana,
     # 5 = una vez al día, 6 = varias veces al día, 7 = una vez por hora, 8 = más de una vez por hora
 
@@ -57,6 +57,28 @@ ESCALAS_ORDINALES = {
 
     "actividad_fisica_cod":  [1, 2, 3, 4, 5, 6, 7, 8],
     # 1 = 0 días, 2 = 1 día, …, 8 = 7 días (última semana)
+}
+
+# Codebook: significado de cada código (2023_Data_Users_Guide_codebook.pdf).
+# Es la única fuente de las etiquetas; el notebook de F4 la muestra y la valida.
+CATEGORIAS = {
+    "edad_cod": {1: "12 años o menos", 2: "13 años", 3: "14 años", 4: "15 años",
+                 5: "16 años", 6: "17 años", 7: "18 años o más"},
+    "sexo_cod": {1: "Femenino", 2: "Masculino"},
+    "raceeth_cod": {1: "Indígena americana o nativa de Alaska", 2: "Asiática",
+                    3: "Negra o afroamericana", 4: "Nativa de Hawái u otras islas del Pacífico",
+                    5: "Blanca", 6: "Hispana o latina", 7: "Múltiple, hispana",
+                    8: "Múltiple, no hispana"},
+    "salud_mental_cod": {1: "Nunca", 2: "Rara vez", 3: "A veces",
+                         4: "La mayor parte del tiempo", 5: "Siempre"},
+    "redes_sociales_cod": {1: "No usa", 2: "Pocas veces al mes", 3: "Una vez a la semana",
+                           4: "Pocas veces a la semana", 5: "Una vez al día",
+                           6: "Varias veces al día", 7: "Una vez por hora",
+                           8: "Más de una vez por hora"},
+    "sueno_cod": {1: "4 horas o menos", 2: "5 horas", 3: "6 horas", 4: "7 horas",
+                  5: "8 horas", 6: "9 horas", 7: "10 horas o más"},
+    "actividad_fisica_cod": {1: "0 días", 2: "1 día", 3: "2 días", 4: "3 días",
+                             5: "4 días", 6: "5 días", 7: "6 días", 8: "7 días"},
 }
 
 
@@ -158,7 +180,7 @@ def clasificar_variables(df: pd.DataFrame) -> dict:
         "raceeth_cod":           {"rol_equipo": "nominal",            "nota": "raza/etnicidad, 8 categorías"},
         "edad_cod":              {"rol_equipo": "ordinal",            "nota": "1 = ≤12 años … 7 = ≥18 años"},
         "actividad_fisica_cod":  {"rol_equipo": "ordinal",            "nota": "1 = 0 días … 8 = 7 días/semana"},
-        "redes_sociales_cod":    {"rol_equipo": "ordinal",            "nota": "1 = no usa … 8 = ≥6 h/día"},
+        "redes_sociales_cod":    {"rol_equipo": "ordinal",            "nota": "1 = no usa … 8 = más de una vez por hora (frecuencia)"},
         "salud_mental_cod":      {"rol_equipo": "ordinal",            "nota": "1 = Never … 5 = Always"},
         "sueno_cod":             {"rol_equipo": "ordinal",            "nota": "1 = ≤4 h … 7 = ≥10 h por noche"},
     }
