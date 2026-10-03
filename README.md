@@ -7,7 +7,7 @@ mediante un flujo de trabajo reproducible, documentado y colaborativo.
 
 > **Estado: proyecto completo (F1–F4).** Punto de entrada:
 > `F4/notebooks/S3_F4_Integracion_Resultados_Grupo8.ipynb`. Informe final:
-> `docs/Informe/f4_s04_evaluacion_entregable_grupo8.pdf`.
+> `docs/Informe/f4_s03_evaluacion_entregable_grupo8.pdf`.
 
 **Resultados principales (ponderados, IC 95 %).** El 28,5 % (26,7–30,4) de los
 estudiantes reporta salud mental no buena la mayor parte del tiempo o siempre;
@@ -155,7 +155,7 @@ proyecto-grupo8-mcdi500/
 │  └─ figuras/                      figura1..3 (informe) y figuraA1..A2 (anexo)
 ├─ tests/                           36 pruebas pytest (F4 + regresión de F1–F3)
 ├─ docs/                            documentación transversal al proyecto
-│  ├─ bitacora_decisiones.md        registro de decisiones técnicas (0.1 a F4.19)
+│  ├─ bitacora_decisiones.md        registro de decisiones técnicas (0.1 a F4.24)
 │  ├─ arquitectura.md               diagramas de flujo, componentes, secuencia y datos
 │  ├─ adr/                          ADR-0001 a ADR-0005 (decisiones de arquitectura)
 │  ├─ diccionario_variables.md      diccionario de variables del dataset
@@ -163,7 +163,7 @@ proyecto-grupo8-mcdi500/
 │  │  ├─ f1_s01_evaluacion_entregable_grupo8.pdf
 │  │  ├─ f3_s02_grupo8.pdf         Formativa 3
 │  │  ├─ f3_s02_entregable_grupo8.pdf   Sumativa 2
-│  │  └─ f4_s04_evaluacion_entregable_grupo8.pdf   Sumativa 3 (informe final)
+│  │  └─ f4_s03_evaluacion_entregable_grupo8.pdf   Sumativa 3 (informe final)
 │  └─ Mapa Conceptual Proyecto/
 ├─ .gitignore
 ├─ .mailmap                         unifica las identidades Git del equipo
@@ -264,7 +264,7 @@ razones entre implementaciones y la forma de las curvas.
 
 ### Fase 4 · Notebook central: `S3_F4_Integracion_Resultados_Grupo8.ipynb`
 
-**Es el entregable de la Sumativa 3.** 61 celdas (31 de código), ejecución continua sin errores
+**Es el entregable de la Sumativa 3.** 64 celdas (32 de código), ejecución continua sin errores
 (≈ 3–5 minutos). No define clases: importa `src/`, `F3/src/` y `F4/src/`.
 
 | Sección | Qué hace | Evidencia que deja |
@@ -282,6 +282,7 @@ razones entre implementaciones y la forma de las curvas.
 | 11 | Ejecución de F1–F3 en copia limpia | `verificacion_ejecucion_f4.csv` |
 | 12 | Arquitectura generada con `inspect` | `arquitectura_f4.csv` |
 | 14 | Verificación final: cada objetivo con su evidencia, huella SHA-256 de los datos y lista de 11 comprobaciones | `huellas_f4.csv`, `lista_verificacion_f4.csv` |
+| 15 | **Respuesta a la pregunta de investigación**: tres hallazgos y el veredicto de H1–H4, leídos de los resultados | `respuesta_pregunta_f4.csv` |
 
 **Método de estimación.** Linealización de Taylor con conglomerados (par estrato-psu) con
 reemplazo, IC en escala logit con *t* de 73 grados de libertad. Es el método de los informes
@@ -383,7 +384,7 @@ persona **como dos autores distintos** y sus commits aparecen divididos.
 | Abigail Robles Chávez | bitácora (F3.19–F3.25) y README | pruebas `pytest`, arquitectura y ADR, README final |
 | Daniel Pérez Ramirez | notebook central de F3, `segmentacion.py` y mediciones | restauración de módulos (F4.2), diseño muestral (`encuesta.py`), notebook central de F4 |
 | Matías Manríquez Ortiz | organización de `F3/notebooks/`, `__init__.py` e informes | `timeit`, figuras y verificación; resultados e informe final |
-| Roberto Sánchez Saldivia | núcleo POO (`transformadores.py`, `estrategias.py`, `pipeline.py`) | dependencias de F4, bitácora F4.1–F4.19, changelog |
+| Roberto Sánchez Saldivia | núcleo POO (`transformadores.py`, `estrategias.py`, `pipeline.py`) | dependencias de F4, bitácora de F4, changelog |
 
 El trabajo se reparte por componente, no por archivo: cada integrante toma una
 parte del sistema y la documenta en la bitácora.

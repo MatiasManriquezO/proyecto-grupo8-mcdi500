@@ -24,7 +24,7 @@ directamente la sección de metodología del informe.
 |---|---|---|
 | 1.1 | Acotar a **una** pregunta de investigación principal | Con 117 columnas no es posible avanzar sin acotar; la pregunta define la selección de columnas |
 | 1.2 | Desenlace: `q84` (salud mental percibida) | Ordinal de 5 niveles (Never–Always), 21,9 % de faltantes |
-| 1.3 | Exposición: `q80` (uso de dispositivos electrónicos) | Ordinal de 8 niveles (no usa – ≥6 h/día), 24,4 % de faltantes |
+| 1.3 | Exposición: `q80` (frecuencia de uso de redes sociales) | Ordinal de 8 niveles (no usa – más de una vez por hora), 24,4 % de faltantes. Descripción corregida en F4.21: es una escala de frecuencia, no de horas diarias |
 | 1.4 | Controles: `q85` (sueño), `q76` (actividad física), `q1` (edad), `q2` (sexo), `raceeth` | Confusores documentados en la literatura sobre pantallas y salud mental adolescente |
 | 1.5 | Declarar alcance sin pruebas de hipótesis formales | Fases 1–2 cubren definición y pipeline de datos; la inferencia corresponde a fases posteriores |
 
@@ -156,6 +156,9 @@ Las salidas de la Formativa 3 quedan en `F3/data/_demo/` (F3.15).
 | F4.19 | Una figura por objetivo específico, en tres actos (contexto, contraste, resolución) | Título con el hallazgo, n bajo cada categoría (niveles 2–3 con 307 y 175 casos), color con función (rojo = hallazgo) y cuatro frases por figura |
 | F4.20 | Verificación final calculada desde archivos (sección 14) | Cada OE1–OE5 se enlaza a su archivo de evidencia y se comprueba que existe; huella SHA-256 del CSV del CDC, del CSV de F2 y de `requirements.txt` con fin de línea normalizado a `\n` (Git en Windows guarda `\r\n`); lista de 11 comprobaciones de la guía, 11 de 11 |
 | F4.21 | Declarar el significado de cada código en un solo lugar (`CATEGORIAS` en `src/procesamiento.py`) y mostrarlo en la sección 3 del notebook | 7 variables y 45 códigos con etiqueta, validados contra los dominios; se corrige el comentario que describía `q80` en horas diarias, cuando es una escala de frecuencia (F1 y F2 ya lo aclaraban) |
+| F4.22 | Dejar una sola copia de `procesamiento.py`, en `src/`, y regenerar `changelog.md` desde el historial | El commit `27ab70a` subió el módulo a `F4/src/` y quedaron dos copias distintas; el notebook funcionaba porque `F4/src` va primero en `sys.path`. El primer `changelog.md` (`82b107a`) era la copia de muestra y sus enlaces no abrían commits reales: `changelog.py` ahora identifica los 13 commits publicados de F4 por su hash |
+| F4.23 | Cerrar el notebook respondiendo la pregunta de investigación (sección 15) | Retroalimentación de la Sumativa 2: el notebook debía responder la pregunta y no solo integrar resultados. El veredicto de cada hipótesis se decide con una regla (IC que no se solapan u OR cuyo IC excluye 1) sobre los archivos de resultados: H1, H2 y H4 se sostienen; H3 no es concluyente |
+| F4.24 | Informe final de 10 páginas en total | Retroalimentación de la Sumativa 2 (el informe anterior tenía 33): interlineado 1,15, figuras de 10,5 cm y los anexos pasan a ser archivos de `F4/resultados/` citados en el texto. Tres hallazgos sostienen los resultados; las mediciones de eficiencia quedan en la metodología. El archivo pasa a llamarse `f4_s03_evaluacion_entregable_grupo8.pdf`, como la plantilla |
 
 **Cifras verificadas de esta fase** (ponderadas, IC 95 %):
 
