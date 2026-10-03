@@ -6,7 +6,7 @@ commit se le agrega su fase y su justificación técnica. Así cada fila enlaza
 a un commit que existe (vínculo verificable) y no puede contradecir al
 historial.
 
-Uso, desde la raíz del repositorio, después de subir los commits:
+Uso, desde la raíz del repositorio, después de subir los demás commits:
     python F4/src/changelog.py
 
 Grupo 8 · MCDI500 · Universidad Andrés Bello
@@ -67,34 +67,39 @@ HISTORICOS = {
     "2bdfc06": ("F3", "Informe de la Sumativa 2 versionado"),
 }
 
-# Commits planificados de la Sumativa 3 (mensaje -> justificación)
-FASE4 = {
-    "fix: restaura modulos de src y F3/src eliminados en f809a58":
-        "El notebook de F3 fallaba con ModuleNotFoundError; se restauran desde f809a58^ sin cambios (F4.2)",
-    "fix: restaura modulos de src y F3/src eliminados":
-        "El commit f809a58 borró 7 módulos y el notebook de F3 fallaba con ModuleNotFoundError; se restauran sin cambios (F4.2)",
-    "feat: agrega dependencias de F4 a requirements.txt":
-        "scipy (cuantil t), matplotlib y seaborn (figuras) y pytest (pruebas), versiones fijadas (F4.16)",
-    "feat: agrega modulo de diseno muestral en F4/src/encuesta.py":
-        "Estimación ponderada con linealización de Taylor; reproduce 6 cifras e IC del CDC (F4.1, F4.3)",
-    "feat: agrega mediciones con timeit, figuras y verificacion en F4/src":
-        "timeit y orden empírico (F4.8); cálculo separado del dibujo (F4.15); ejecución de F1-F3 en copia (F4.14)",
-    "test: agrega pruebas automatizadas con pytest en tests/":
-        "36 pruebas: normales, límite y excepciones de F4 y regresión de F1-F3 (F4.13)",
-    "feat: agrega notebook central de la Fase 4 ejecutado":
-        "Integra F1-F4, resultados ponderados, modelo, eficiencia y verificación final (11 de 11, F4.20) y codebook (F4.21); corrige en src/procesamiento.py la descripción de q80, que es de frecuencia y no de horas; ejecución continua sin errores",
-    "test: agrega resultados y figuras de la Fase 4":
-        "Tablas en F4/resultados y figuras en F4/figuras generadas por el notebook, citadas en el informe",
-    "docs: agrega arquitectura y registro de decisiones ADR":
-        "Diagramas de flujo, componentes, secuencia y datos; 5 ADR con alternativas descartadas",
-    "docs: actualiza bitacora con decisiones F4.1 a F4.21":
-        "Cada decisión de F4 con la cifra que la respalda",
-    "docs: actualiza README con la Fase 4":
-        "Instrucciones de ejecución de F4, pruebas, dependencias y estructura final",
-    "docs: agrega informe final de la Sumativa 3":
-        "Informe técnico versionado junto al código que describe",
-    "docs: agrega changelog con commits de F1 a F4":
-        "Registro trazable de fecha, commit y justificación (este archivo)",
+# Commits de la Fase 4 ya publicados (hash corto -> (tipo, justificación)).
+# Se identifican por hash y no por mensaje porque varios mensajes son genéricos.
+FASE4_PUBLICADOS = {
+    "a37fd64": ("Corregido", "El commit f809a58 borró 7 módulos y el notebook de F3 fallaba con ModuleNotFoundError; se restauran sin cambios (F4.2)"),
+    "f44cf03": ("Corregido", "El comentario de procesamiento.py describía q80 en horas diarias; es una escala de frecuencia de uso (F4.21)"),
+    "d4fe30e": ("Agregado", "requirements.txt: scipy (cuantil t), matplotlib y seaborn (figuras) y pytest (pruebas), con versiones fijadas (F4.16)"),
+    "98b2753": ("Agregado", "Estimación ponderada con linealización de Taylor; reproduce 6 cifras e IC del CDC (F4.1, F4.3)"),
+    "56cd13c": ("Agregado", "timeit y orden empírico (F4.8); cálculo separado del dibujo (F4.15); ejecución de F1-F3 en copia (F4.14)"),
+    "0e6f8a0": ("Agregado", "36 pruebas: normales, límite y excepciones de F4 y regresión de F1-F3 (F4.13)"),
+    "27ab70a": ("Agregado", "Notebook que integra F1-F4: resultados ponderados, modelo, eficiencia, codebook (F4.21) y verificación final (F4.20). Subió procesamiento.py a F4/src por error; se corrige después (F4.22)"),
+    "4c071c3": ("Agregado", "Tablas en F4/resultados y figuras en F4/figuras generadas por el notebook, citadas en el informe"),
+    "f731757": ("Agregado", "Diagramas de flujo, componentes, secuencia y datos; 5 ADR con alternativas descartadas"),
+    "8580a0e": ("Cambiado", "Bitácora con las decisiones F4.1 a F4.21, cada una con la cifra que la respalda"),
+    "95cd391": ("Cambiado", "README con la ejecución de F4, pruebas, dependencias y estructura final"),
+    "266898b": ("Agregado", "Informe técnico versionado junto al código que describe"),
+    "82b107a": ("Agregado", "Primera versión del changelog; era la copia de muestra y sus enlaces no abrían commits reales. Se regenera desde git log (F4.22)"),
+}
+
+# Commits de corrección posteriores (mensaje -> (tipo, justificación)).
+# Se identifican por mensaje porque su hash no existe hasta que se suben.
+FASE4_CORRECCIONES = {
+    "fix: deja una sola copia de procesamiento.py en src":
+        ("Corregido", "Había dos copias distintas (src y F4/src); queda la de src con el codebook CATEGORIAS, que es la que importan F1-F4 (F4.22)"),
+    "feat: agrega al notebook de F4 la respuesta a la pregunta de investigacion":
+        ("Agregado", "Sección 15: responde la pregunta de F1 con tres hallazgos leídos de los resultados (retroalimentación Sumativa 2, F4.23)"),
+    "fix: changelog.py reconoce los commits reales de la Fase 4":
+        ("Corregido", "El generador buscaba mensajes planificados que no se usaron; ahora identifica los commits publicados por su hash (F4.22)"),
+    "docs: actualiza bitacora y README con las correcciones finales":
+        ("Cambiado", "Decisiones F4.22 a F4.24 y conteos del notebook (64 celdas, 32 de código)"),
+    "docs: actualiza informe final a 10 paginas":
+        ("Cambiado", "El informe pasa de 15 a 10 páginas, describe el historial real de Git y toma el nombre f4_s03 de la plantilla (retroalimentación Sumativa 2, F4.24)"),
+    "docs: regenera changelog desde el historial real":
+        ("Corregido", "changelog.md generado con python F4/src/changelog.py: autores y enlaces corresponden a commits que existen (este archivo)"),
 }
 
 
@@ -103,7 +108,13 @@ def _norm(mensaje: str) -> str:
     return mensaje.strip().rstrip(".").lower()
 
 
-_FASE4_NORM = {_norm(m): j for m, j in FASE4.items()}
+_CORRECCIONES_NORM = {_norm(m): v for m, v in FASE4_CORRECCIONES.items()}
+
+
+def clasificar_f4(commit: dict):
+    """(tipo, justificación) si el commit pertenece a la Fase 4; None si no."""
+    publicado = FASE4_PUBLICADOS.get(commit["corto"][:7])
+    return publicado or _CORRECCIONES_NORM.get(_norm(commit["mensaje"]))
 
 
 def _git(*args, raiz: Path) -> str:
@@ -123,31 +134,20 @@ def leer_historial(raiz: Path, rama: str = "HEAD") -> list[dict]:
     return commits
 
 
-def _categoria(mensaje: str) -> str:
-    """Agregado / Cambiado / Corregido, según el prefijo y el verbo del commit."""
-    m = _norm(mensaje)
-    if m.startswith("fix"):
-        return "Corregido"
-    if " actualiza" in m:
-        return "Cambiado"
-    return "Agregado"
-
-
 def seccion_fase4(commits: list[dict]) -> list[str]:
     """Bloque «## [F4] fecha» con los commits de la Fase 4 agrupados por tipo."""
-    propios = [c for c in commits if _norm(c["mensaje"]) in _FASE4_NORM]
+    propios = [(c, clasificar_f4(c)) for c in commits if clasificar_f4(c)]
     if not propios:
         return []
-    lineas = [f"## [F4] {propios[-1]['fecha']}", ""]
+    lineas = [f"## [F4] {propios[-1][0]['fecha']}", ""]
     for tipo in ("Corregido", "Agregado", "Cambiado"):
-        grupo = [c for c in propios if _categoria(c["mensaje"]) == tipo]
+        grupo = [(c, motivo) for c, (t, motivo) in propios if t == tipo]
         if not grupo:
             continue
         lineas += [f"### {tipo}", ""]
-        for c in grupo:
+        for c, motivo in grupo:
             enlace = f"[`{c['corto'][:7]}`]({REPOSITORIO}/commit/{c['hash']})"
-            lineas.append(f"- {c['mensaje']} (commit {enlace}, {c['autor']}). "
-                          f"{_FASE4_NORM[_norm(c['mensaje'])]}.")
+            lineas.append(f"- {c['mensaje']} (commit {enlace}, {c['autor']}). {motivo}.")
         lineas.append("")
     return lineas
 
@@ -159,18 +159,12 @@ def generar(raiz: Path | str = ".") -> str:
     for c in commits:
         fase, motivo = HISTORICOS.get(c["corto"][:7], (None, None))
         if fase is None:
-            motivo = _FASE4_NORM.get(_norm(c["mensaje"]), "—")
-            fase = "F4" if motivo != "—" else "—"
-            if c["mensaje"].startswith("Merge pull request"):
-                fase, motivo = "F4", "Integración de la rama de la Fase 4 a main mediante pull request revisado"
-            elif c["mensaje"].startswith("Merge branch"):
+            f4 = clasificar_f4(c)
+            fase, motivo = ("F4", f4[1]) if f4 else ("—", "—")
+            if c["mensaje"].startswith("Merge"):
                 fase, motivo = "Repositorio", "Integración de cambios remotos"
         enlace = f"[`{c['corto'][:7]}`]({REPOSITORIO}/commit/{c['hash']})"
         filas.append(f"| {c['fecha']} | {fase} | {enlace} | {c['autor']} | {c['mensaje']} | {motivo} |")
-
-    planificados = {_norm(c["mensaje"]) for c in leer_historial(raiz)}
-    pendientes = [m for m in FASE4 if _norm(m) not in planificados and not m.startswith("docs: agrega changelog")
-                  and not m.startswith("fix: restaura modulos")]
 
     texto = [
         "# Changelog — Proyecto Grupo 8, MCDI500",
@@ -195,9 +189,6 @@ def generar(raiz: Path | str = ".") -> str:
         "- **Documentación:** bitácora con cifra por decisión, ADR, diagramas de arquitectura, "
         "pruebas automatizadas y este changelog generado desde Git.",
     ]
-    if pendientes:
-        texto += ["", "## Commits planificados aún no subidos", "",
-                  *[f"- `{m}`" for m in pendientes]]
     return "\n".join(texto) + "\n"
 
 
