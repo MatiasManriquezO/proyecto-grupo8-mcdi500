@@ -98,6 +98,8 @@ FASE4_CORRECCIONES = {
         ("Cambiado", "Decisiones F4.22 a F4.24 y conteos del notebook (64 celdas, 32 de código)"),
     "docs: actualiza informe final a 10 paginas":
         ("Cambiado", "El informe pasa de 15 a 10 páginas, describe el historial real de Git y toma el nombre f4_s03 de la plantilla (retroalimentación Sumativa 2, F4.24)"),
+    "docs: explica el veredicto de H3 en el notebook de F4":
+        ("Cambiado", "La sección 15 agrega los intervalos de confianza que dejan H3 como no concluyente y se quitan de la salida tres avisos del kernel; código y resultados sin cambios"),
     "docs: regenera changelog desde el historial real":
         ("Corregido", "changelog.md generado con python F4/src/changelog.py: autores y enlaces corresponden a commits que existen (este archivo)"),
 }
